@@ -18,6 +18,7 @@ import {Input, Icon, Stack} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
+import {heightPixel} from '../../scale/scaling';
 
 const UploadPhotoScreen = ({navigation}) => {
   const [show, setShow] = React.useState(false);
@@ -35,7 +36,14 @@ const UploadPhotoScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <View>
             <CustomText
@@ -43,14 +51,14 @@ const UploadPhotoScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[9]} //32
               TEXT={String.UploadPhoto_Screen_T1}
               FAMILY={theme.fonts.BentonSans_Bold}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
               SIZE={theme.size[7]} //25
               LINE_HEIGHT={theme.size[9]} //32
               TEXT={String.UploadPhoto_Screen_T2}
               FAMILY={theme.fonts.BentonSans_Bold}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <View>
@@ -59,20 +67,20 @@ const UploadPhotoScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
               SIZE={theme.size[3]} //14
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <Stack space={4} w="100%" alignItems="center">
             <TouchableOpacity
               style={styles({schema}).uploadPhoto_Img_Container}>
-              <Image source={Images.Gallery} />
+              <Image source={Images.Gallery} style={styles({schema}).img} />
               <CustomText
                 TEXT={String.From_Gallery}
                 SIZE={theme.size[3]}
@@ -83,7 +91,7 @@ const UploadPhotoScreen = ({navigation}) => {
 
             <TouchableOpacity
               style={styles({schema}).uploadPhoto_Img_Container}>
-              <Image source={Images.Camera} />
+              <Image source={Images.Camera} style={styles({schema}).img} />
               <CustomText
                 TEXT={String.Take_Photo}
                 SIZE={theme.size[3]}

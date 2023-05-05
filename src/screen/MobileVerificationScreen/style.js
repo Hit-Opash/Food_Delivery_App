@@ -16,6 +16,7 @@ export const styles = ({schema}) =>
     bg_img: {
       width: wp('100%'),
       height: hp('35%'),
+      opacity: 0.2,
       position: 'absolute',
     },
     otpInput: {

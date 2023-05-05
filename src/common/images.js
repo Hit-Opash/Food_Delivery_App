@@ -1,7 +1,7 @@
 export const Images = {
   Logo: require('../../assets/images/Logo/Logo.png'),
   BackGroung1: require('../../assets/images/BackGround/BgPattern_1.png'),
-  BackGroung2: require('../../assets/images/BackGround/BgPattern_2.png'),
+  BackGroung2: require('../../assets/images/BackGround/BgPattern-2.png'),
   Feature1: require('../../assets/images/FeatureScreen/Feature_1.png'),
   Feature2: require('../../assets/images/FeatureScreen/Feature_2.png'),
   FaceBookIcon: require('../../assets/images/SignInScreen/facebook_icon.png'),
@@ -22,7 +22,7 @@ export const Images = {
   Profile_Img: require('../../assets/images/UploadPreviewScreen/Profile_Img.png'),
   Close_Icon: require('../../assets/images/UploadPreviewScreen/Close_Icon.png'),
   Map_Pin_Img: require('../../assets/images/SetLocationScreen/Map_Pin_Img.png'),
-  Notification: require('../../assets/images/HomeScreen/Notifiaction_Icon.png'),
+  Notification: require('../../assets/images/HomeScreen/Icon_Notifiaction.png'),
   Search_Icon: require('../../assets/images/HomeScreen/Search_Icon.png'),
   Filter: require('../../assets/images/HomeScreen/Filter_Icon.png'),
   Ads: require('../../assets/images/HomeScreen/Ads_Image.png'),
@@ -33,7 +33,7 @@ export const Images = {
   Call: require('../../assets/images/ChattingScreen/Call_Icon.png'),
   Send: require('../../assets/images/ChattingScreen/Send_Icon.png'),
 
-  Restaurant_1: require('../../assets/images/Restaurant/Restaurant_1.png'),
+  Restaurant_1: require('../../assets/images/Restaurant/Resturant_Image_1.png'),
   Restaurant_2: require('../../assets/images/Restaurant/Restaurant_2.png'),
   Restaurant_3: require('../../assets/images/Restaurant/Restaurant_3.png'),
   Restaurant_4: require('../../assets/images/Restaurant/Restaurant_4.png'),
@@ -43,4 +43,7 @@ export const Images = {
   menu_1: require('../../assets/images/Popular_Menu/Menu_1.png'),
   menu_2: require('../../assets/images/Popular_Menu/Menu_2.png'),
   menu_3: require('../../assets/images/Popular_Menu/Menu_3.png'),
+  Blur_Star: require('../../assets/images/RattingScreen/Blur_Star.png'),
+  Fill_Star: require('../../assets/images/RattingScreen/Fill_Star.png'),
+  Edit_Icon: require('../../assets/images/RattingScreen/Edit_Icon.png'),
 };

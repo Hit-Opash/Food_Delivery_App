@@ -210,7 +210,10 @@ const SignInScreen = ({navigation}) => {
                           <View style={styles({schema}).shadow}>
                             <TouchableOpacity
                               style={styles({schema}).socialMedia_auth}>
-                              <Image source={Images.FaceBookIcon} />
+                              <Image
+                                source={Images.FaceBookIcon}
+                                style={styles({schema}).img}
+                              />
                               <CustomText
                                 SIZE={fontPixel(14)}
                                 TEXT={String.Facebook}
@@ -220,7 +223,10 @@ const SignInScreen = ({navigation}) => {
                           </View>
                           <TouchableOpacity
                             style={styles({schema}).socialMedia_auth}>
-                            <Image source={Images.GoogleIcon} />
+                            <Image
+                              source={Images.GoogleIcon}
+                              style={styles({schema}).img}
+                            />
                             <CustomText
                               SIZE={fontPixel(14)}
                               TEXT={String.Google}
@@ -248,7 +254,7 @@ const SignInScreen = ({navigation}) => {
                       <CustomButton
                         title={String.Login}
                         onPress={() => {
-                          navigation.replace(Screens.BottomTab);
+                          navigation.replace(Screens.HomeScreen);
                         }}
                       />
                     </Stack>

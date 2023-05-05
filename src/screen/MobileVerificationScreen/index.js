@@ -35,7 +35,14 @@ const MobileVerificaionScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <View>
             <CustomText

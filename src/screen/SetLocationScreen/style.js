@@ -3,6 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {heightPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -14,7 +15,8 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: 150,
+      height: hp('35%'),
+      opacity: 0.2,
       position: 'absolute',
     },
     setLocation_Container: {
@@ -33,6 +35,11 @@ export const styles = ({schema}) =>
       borderRadius: theme.size[4], //16
       backgroundColor: theme.colors[schema].creamy,
       padding: 20,
+    },
+    img: {
+      width: heightPixel(40),
+      height: undefined,
+      aspectRatio: 1,
     },
     button: {
       flex: 1,

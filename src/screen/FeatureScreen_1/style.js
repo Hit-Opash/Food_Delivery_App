@@ -10,16 +10,18 @@ export const styles = ({schema}) =>
       flex: 1,
       flexWrap: 'wrap',
     },
-    imageContainer: {},
+    imageContainer: {
+      flex: 1.5,
+    },
     feature1_Img: {
+      flex: 1.5,
       width: wp('100%'),
-      height: hp('45%'),
       resizeMode: 'stretch',
     },
     bottomPart: {
+      flex: 1,
       width: wp('100%'),
       height: hp('45%'),
-      alignItems: 'center',
       justifyContent: 'space-evenly',
     },
     textPart: {

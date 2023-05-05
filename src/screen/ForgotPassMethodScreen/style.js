@@ -16,7 +16,8 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: hp('30%'),
+      height: hp('35%'),
+      opacity: 0.2,
       position: 'absolute',
     },
     method_Container: {
@@ -42,6 +43,8 @@ export const styles = ({schema}) =>
     },
     image: {
       width: heightPixel(48),
+      height: undefined,
+      aspectRatio: 1,
       resizeMode: 'contain',
     },
   });

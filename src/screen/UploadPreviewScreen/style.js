@@ -3,6 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {heightPixel, widthPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -14,7 +15,8 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: 150,
+      height: heightPixel(200),
+      opacity: 0.2,
       position: 'absolute',
     },
     profileStyle_Container: {
@@ -33,8 +35,11 @@ export const styles = ({schema}) =>
     },
     closeIcon: {
       position: 'absolute',
-      top: 15,
-      right: 15,
+      top: heightPixel(15),
+      right: widthPixel(15),
+      width: widthPixel(30),
+      height: undefined,
+      aspectRatio: 1,
     },
     button: {
       flex: 1,

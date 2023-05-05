@@ -20,4 +20,7 @@ export const Screens = {
   ChatScreen: 'ChatScreen',
   BottomTab: 'BottomTab',
   ChattingScreen: 'ChattingScreen',
+  SearchScreen: 'SearchScreen',
+  RattingScreen: 'RattingScreen',
+  VoucherScreen: 'VoucherSreen',
 };

@@ -22,16 +22,16 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const CustomButton = ({title, onPress}) => {
+const CustomButton = ({title, onPress, style}) => {
   const schema = useColorScheme();
   return (
     <LinearGradient
       colors={theme.colors[schema].green_gradient}
-      style={styles({schema}).linearGradient}>
+      style={[styles({schema}).linearGradient, style]}>
       <TouchableOpacity style={styles({schema}).button} onPress={onPress}>
         <CustomText
           FAMILY={theme.fonts.BentonSans_Bold}
-          SIZE={fontPixel(14)}
+          SIZE={fontPixel(16)}
           TEXT={title}
           COLOR={theme.colors[schema].button_text}
         />
@@ -50,9 +50,8 @@ const styles = ({schema}) =>
     },
     button: {
       textAlign: 'center',
-      margin: heightPixel(10),
       backgroundColor: 'transparent',
-      paddingVertical: heightPixel(10),
-      paddingHorizontal: widthPixel(15),
+      paddingVertical: heightPixel(18),
+      paddingHorizontal: widthPixel(60),
     },
   });

@@ -12,6 +12,10 @@ export const styles = ({schema}) =>
       height: hp('40%'),
       position: 'absolute',
     },
+    successScreenContainer: {
+      flex: 1,
+      margin: hp('5%'),
+    },
     tickImg: {
       flex: 1,
       width: wp('40%'),

@@ -18,6 +18,7 @@ import {Input, Icon, Stack} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
+import {heightPixel} from '../../scale/scaling';
 
 const PaymentMethodScreen = ({navigation}) => {
   const [selected, setSelect] = useState(null);
@@ -35,7 +36,14 @@ const PaymentMethodScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <View>
             <CustomText
@@ -43,7 +51,7 @@ const PaymentMethodScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[9]} //32
               TEXT={String.Payment_Method}
               FAMILY={theme.fonts.BentonSans_Bold}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <View>
@@ -52,14 +60,14 @@ const PaymentMethodScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
               SIZE={theme.size[3]} //14
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <Stack space={4} w="100%" alignItems="center">
@@ -72,7 +80,7 @@ const PaymentMethodScreen = ({navigation}) => {
                     selected == id && {backgroundColor: 'skyblue'},
                   ]}
                   onPress={() => setSelect(id)}>
-                  <Image source={element} />
+                  <Image source={element} style={styles({scheme}).img} />
                   {console.log(element)}
                 </TouchableOpacity>
               );

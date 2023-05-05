@@ -35,6 +35,10 @@ import ProfileScreen from '../screen/ProfileScreen';
 import ShopScreen from '../screen/ShopScreen';
 import ChatScreen from '../screen/ChatScreen';
 import ChattingScreen from '../screen/ChattingScreen';
+import {heightPixel} from '../scale/scaling';
+import SearchScreen from '../screen/SearchScreen';
+import RattingScreen from '../screen/RattingScreen';
+import VoucherScreen from '../screen/VoucherScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -84,6 +88,9 @@ const Navigation = () => {
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
       <Stack.Screen name="BottomTab" component={CustomTab} />
       <Stack.Screen name="ChattingScreen" component={ChattingScreen} />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
+      <Stack.Screen name="RattingScreen" component={RattingScreen} />
+      <Stack.Screen name="VoucherScreen" component={VoucherScreen} />
     </Stack.Navigator>
   );
 };
@@ -168,9 +175,9 @@ export function CustomTab() {
         tabBarStyle: {
           position: 'absolute',
           margin: wp('5%'),
-          borderRadius: 16,
-          padding: 32,
-          height: 75,
+          borderRadius: heightPixel(16),
+          padding: heightPixel(30),
+          height: heightPixel(72),
         },
       }}>
       {TabArr.map((item, index) => {

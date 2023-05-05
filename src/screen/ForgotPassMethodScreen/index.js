@@ -15,7 +15,7 @@ import CustomButton from '../../component/CustomButton';
 import {Screens} from '../../common/screen';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
-import {fontPixel, heightPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel, widthPixel} from '../../scale/scaling';
 
 const ForgotPassMethodScreen = ({navigation}) => {
   const schema = useColorScheme();
@@ -34,7 +34,14 @@ const ForgotPassMethodScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <CustomText
             SIZE={fontPixel(24)} //24

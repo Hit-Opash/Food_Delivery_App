@@ -14,7 +14,8 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: 150,
+      height: hp('35%'),
+      opacity: 0.2,
       position: 'absolute',
     },
     method_Container: {
@@ -37,6 +38,11 @@ export const styles = ({schema}) =>
     button: {
       flex: 1,
       justifyContent: 'flex-end',
+    },
+    errorDisplayContainer: {
+      flexDirection: 'row',
+      alignSelf: 'flex-start',
+      alignItems: 'center',
     },
     errorText: {
       color: 'red',

@@ -23,6 +23,7 @@ import CustomText from '../../component/CustomText';
 import {useColorScheme} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {Log} from '../../common/displayLog';
+import {heightPixel} from '../../scale/scaling';
 
 const SetLocationScreen = ({navigation}) => {
   const schema = useColorScheme();
@@ -128,7 +129,14 @@ const SetLocationScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <View>
             <CustomText
@@ -136,7 +144,7 @@ const SetLocationScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[9]} //32
               TEXT={String.Set_Your_Location}
               FAMILY={theme.fonts.BentonSans_Bold}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <View>
@@ -145,19 +153,19 @@ const SetLocationScreen = ({navigation}) => {
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
               SIZE={theme.size[3]} //14
               LINE_HEIGHT={theme.size[6]} //22
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
-              ALIGN_SELF={true}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
           <View style={styles({schema}).setLocation_Container}>
             <View style={styles({schema}).topPart}>
-              <Image source={Images.Map_Pin_Img} />
+              <Image source={Images.Map_Pin_Img} style={styles({schema}).img} />
               <CustomText
                 TEXT={String.Your_Location}
                 SIZE={theme.size[4]}

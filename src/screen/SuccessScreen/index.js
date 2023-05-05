@@ -26,36 +26,38 @@ const SuccessScreen = ({navigation, route}) => {
         style={styles({schema}).bg_img}
       />
       <SafeAreaView style={{flex: 1}}>
-        <View style={styles({schema}).textContainer}>
-          <View style={styles({schema}).tickImg}>
-            <Image
-              source={Images.Success_Tick_Icon}
-              style={styles({schema}).img}
+        <View style={styles({schema}).successScreenContainer}>
+          <View style={styles({schema}).textContainer}>
+            <View style={styles({schema}).tickImg}>
+              <Image
+                source={Images.Success_Tick_Icon}
+                style={styles({schema}).img}
+              />
+            </View>
+            <View style={styles({schema}).msgPart}>
+              <CustomText
+                SIZE={fontPixel(32)} //32
+                FAMILY={theme.fonts.BentonSans_Bold}
+                TEXT={String.Congrats}
+                LINE_HEIGHT={heightPixel(40)} //40
+              />
+              <CustomText
+                SIZE={fontPixel(22)} //22
+                FAMILY={theme.fonts.BentonSans_Bold}
+                TEXT={msg}
+                LINE_HEIGHT={heightPixel(30)} //30
+              />
+            </View>
+          </View>
+          <View style={styles({schema}).button}>
+            <CustomButton
+              title={String.Back}
+              onPress={() => {
+                // navigation.popToTop();
+                navigation.replace(renderScreen);
+              }}
             />
           </View>
-          <View style={styles({schema}).msgPart}>
-            <CustomText
-              SIZE={fontPixel(32)} //32
-              FAMILY={theme.fonts.BentonSans_Bold}
-              TEXT={String.Congrats}
-              LINE_HEIGHT={heightPixel(40)} //40
-            />
-            <CustomText
-              SIZE={fontPixel(22)} //22
-              FAMILY={theme.fonts.BentonSans_Bold}
-              TEXT={msg}
-              LINE_HEIGHT={heightPixel(30)} //30
-            />
-          </View>
-        </View>
-        <View style={styles({schema}).button}>
-          <CustomButton
-            title={String.Back}
-            onPress={() => {
-              navigation.popToTop();
-              navigation.replace(renderScreen);
-            }}
-          />
         </View>
       </SafeAreaView>
     </>

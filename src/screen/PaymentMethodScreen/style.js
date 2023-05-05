@@ -3,6 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { heightPixel } from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({scheme}) =>
   StyleSheet.create({
@@ -14,16 +15,22 @@ export const styles = ({scheme}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: 150,
+      height: hp('35%'),
+      opacity: 0.2,
       position: 'absolute',
     },
     paymentMethod_Img_Container: {
       width: wp('90%'),
-      padding: 30,
       borderRadius: theme.size[6],
       borderColor: theme.colors[scheme].text,
       borderWidth: 1,
       alignItems: 'center',
+    },
+    img: {
+      width: heightPixel(100),
+      height: undefined,
+      aspectRatio: 1,
+      resizeMode: 'contain',
     },
     button: {
       flex: 1,

@@ -7,6 +7,7 @@ import {theme} from '../../theme';
 import {String} from '../../common/strings';
 import CustomButton from '../../component/CustomButton';
 import {useColorScheme} from 'react-native';
+import { fontPixel, heightPixel } from '../../scale/scaling';
 
 const FeatureScreen1 = ({navigation}) => {
   const schema = useColorScheme();
@@ -24,15 +25,15 @@ const FeatureScreen1 = ({navigation}) => {
             <View>
               <CustomText
                 FAMILY={theme.fonts.BentonSans_Bold}
-                SIZE={theme.size[6]} //22
-                LINE_HEIGHT={theme.size[8]} //28
+                SIZE={fontPixel(22)} //22
+                LINE_HEIGHT={heightPixel(28)} //28
                 TEXT={String.Feature_1_T1}
                 COLOR={theme.colors[schema].text}
               />
               <CustomText
                 FAMILY={theme.fonts.BentonSans_Bold}
-                SIZE={theme.size[6]} //22
-                LINE_HEIGHT={theme.size[8]} //28
+                SIZE={fontPixel(22)} //22
+                LINE_HEIGHT={heightPixel(28)} //28
                 TEXT={String.Feature_1_T2}
                 COLOR={theme.colors[schema].text}
               />
@@ -40,15 +41,15 @@ const FeatureScreen1 = ({navigation}) => {
             <View>
               <CustomText
                 FAMILY={theme.fonts.BentonSans_Book}
-                SIZE={theme.size[2]} //12
-                LINE_HEIGHT={theme.size[6]} //22
+                SIZE={fontPixel(12)} //12
+                LINE_HEIGHT={heightPixel(22)} //22
                 TEXT={String.Feature_1_D1}
                 COLOR={theme.colors[schema].text}
               />
               <CustomText
-                SIZE={theme.size[2]} //12
+                SIZE={fontPixel(12)} //12
                 FAMILY={theme.fonts.BentonSans_Book}
-                LINE_HEIGHT={theme.size[6]} //22
+                LINE_HEIGHT={heightPixel(22)} //22
                 TEXT={String.Feature_1_D2}
                 COLOR={theme.colors[schema].text}
               />

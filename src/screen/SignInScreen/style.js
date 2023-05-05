@@ -42,7 +42,13 @@ export const styles = ({schema}) =>
       width: wp('40%'),
       padding: heightPixel(15),
       justifyContent: 'center',
-      gap: widthPixel(8),
+      gap: widthPixel(10),
+    },
+    img: {
+      width: widthPixel(28),
+      height: undefined,
+      aspectRatio: 1,
+      resizeMode: 'contain',
     },
     shadow: {},
     errorText: {

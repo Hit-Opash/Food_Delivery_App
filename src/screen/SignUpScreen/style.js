@@ -30,7 +30,7 @@ export const styles = ({schema}) =>
       justifyContent: 'center',
     },
     secondPartContainer: {
-      flex: 1,
+      height: hp('70%'),
       justifyContent: 'space-evenly',
     },
     container_2: {

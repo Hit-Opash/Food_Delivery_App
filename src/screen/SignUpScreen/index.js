@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Box,
-  Checkbox,
-  CheckIcon,
-  Icon,
-  Input,
-  Stack,
-  WarningIcon,
-} from 'native-base';
+import {Box, Checkbox, Icon, Input, Stack} from 'native-base';
 import {
   Image,
   ImageBackground,
@@ -26,11 +18,6 @@ import {String} from '../../common/strings';
 import {theme} from '../../theme';
 import {Images} from '../../common/images';
 import LogoComponent from '../../component/LogoComponent';
-import {
-  heightPercentageToDP,
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 import {styles} from './style';
 import CustomButton from '../../component/CustomButton';
 import CustomText from '../../component/CustomText';
@@ -43,16 +30,11 @@ import {
   heightPixel,
   moderateScale,
 } from '../../scale/scaling';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import {Key} from '../../common/storagekey';
 import {Log} from '../../common/displayLog';
-import {TextInput} from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SignUpScreen = ({navigation}) => {
   console.log(useWindowDimensions());
@@ -162,6 +144,7 @@ const SignUpScreen = ({navigation}) => {
                           <Input
                             name="userName"
                             width="90%"
+                            py={4}
                             color={theme.colors[schema].text}
                             onChangeText={handleChange('userName')}
                             onBlur={handleBlur('userName')}
@@ -182,9 +165,10 @@ const SignUpScreen = ({navigation}) => {
                           {errors.userName && touched.userName && (
                             <View
                               style={styles({schema}).errorDisplayContainer}>
-                              <WarningIcon
+                              <Icon
+                                as={<MaterialIcons name={'error'} />}
                                 size="3"
-                                mr={2}
+                                mr={1}
                                 ml={2}
                                 color="#FF0000"
                               />
@@ -196,6 +180,7 @@ const SignUpScreen = ({navigation}) => {
                           <Input
                             name="email"
                             width="90%"
+                            py={4}
                             color={theme.colors[schema].text}
                             autoCapitalize="none"
                             onChangeText={handleChange('email')}
@@ -216,9 +201,10 @@ const SignUpScreen = ({navigation}) => {
                           {errors.email && touched.email && (
                             <View
                               style={styles({schema}).errorDisplayContainer}>
-                              <WarningIcon
+                              <Icon
+                                as={<MaterialIcons name={'error'} />}
                                 size="3"
-                                mr={2}
+                                mr={1}
                                 ml={2}
                                 color="#FF0000"
                               />
@@ -230,6 +216,7 @@ const SignUpScreen = ({navigation}) => {
                           <Input
                             name="password"
                             width="90%"
+                            py={4}
                             color={theme.colors[schema].text}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -249,9 +236,10 @@ const SignUpScreen = ({navigation}) => {
                           {errors.password && touched.password && (
                             <View
                               style={styles({schema}).errorDisplayContainer}>
-                              <WarningIcon
+                              <Icon
+                                as={<MaterialIcons name={'error'} />}
                                 size="3"
-                                mr={2}
+                                mr={1}
                                 ml={2}
                                 color="#FF0000"
                               />

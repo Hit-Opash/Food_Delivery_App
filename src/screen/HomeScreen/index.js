@@ -17,6 +17,7 @@ import {theme} from '../../theme';
 import {Icon, Input} from 'native-base';
 import {FlatList} from 'react-native-gesture-handler';
 import {fontPixel, heightPixel} from '../../scale/scaling';
+import {Screens} from '../../common/screen';
 
 const RestaurantData = [
   {
@@ -81,7 +82,7 @@ const menuData = [
   },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const schema = useColorScheme();
   return (
     <>
@@ -90,7 +91,7 @@ const HomeScreen = () => {
         style={styles({schema}).bg_img}
       />
       <SafeAreaView style={{flex: 1}}>
-        <ScrollView style={{marginBottom: 70}}>
+        <ScrollView>
           <View style={styles({schema}).rootContainer}>
             <View style={styles({schema}).topContainer}>
               <View style={styles({schema}).titleContainer}>
@@ -117,7 +118,7 @@ const HomeScreen = () => {
                 />
               </TouchableOpacity>
             </View>
-            <SearchBar schema={schema} />
+            <SearchBar schema={schema} navigation={navigation} />
             <RestaurantList schema={schema} />
             <PopularMenuList schema={schema} />
           </View>
@@ -127,12 +128,13 @@ const HomeScreen = () => {
   );
 };
 
-const SearchBar = ({schema}) => {
+const SearchBar = ({schema, navigation}) => {
   return (
     <View style={styles({schema}).searchBarContainer}>
       <Input
         placeholder={String.Search_Hint}
         width="80%"
+        py={4}
         borderRadius={16}
         fontSize={14}
         alignSelf="flex-start"
@@ -145,7 +147,11 @@ const SearchBar = ({schema}) => {
           />
         }
       />
-      <TouchableOpacity style={styles({schema}).filterIconContainer}>
+      <TouchableOpacity
+        style={styles({schema}).filterIconContainer}
+        onPress={() => {
+          navigation.navigate(Screens.SearchScreen);
+        }}>
         <Image source={Images.Filter} style={styles({schema}).filterIcon} />
       </TouchableOpacity>
     </View>
@@ -204,7 +210,7 @@ const RestaurantBox = ({data, schema}) => {
   return (
     <TouchableOpacity style={styles({schema}).box}>
       <View style={styles({schema}).boxImage}>
-        <Image source={data.icon} />
+        <Image source={data.icon} style={styles({schema}).image1} />
       </View>
       <View style={styles({schema}).boxText}>
         <CustomText TEXT={data.name} FAMILY={theme.fonts.BentonSans_Bold} />
@@ -219,7 +225,7 @@ const PopularMenuBox = ({data, schema}) => {
     <TouchableOpacity style={styles({schema}).menuBox}>
       <View style={styles({schema}).leftPart}>
         <View>
-          <Image source={data.icon} />
+          <Image source={data.icon} style={styles({schema}).image2} />
         </View>
         <View style={styles({schema}).boxText2}>
           <CustomText

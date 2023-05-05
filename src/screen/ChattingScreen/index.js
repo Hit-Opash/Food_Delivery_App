@@ -16,6 +16,7 @@ import CustomText from '../../component/CustomText';
 import {String} from '../../common/strings';
 import {Icon, Input} from 'native-base';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 
 const ChattingScreen = ({navigation, route}) => {
   const schema = useColorScheme();
@@ -35,23 +36,28 @@ const ChattingScreen = ({navigation, route}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <View>
             <CustomText
-              SIZE={theme.size[7]} //25
-              LINE_HEIGHT={theme.size[9]} //32
+              SIZE={fontPixel(24)} //25
               TEXT={String.Chat}
               FAMILY={theme.fonts.BentonSans_Bold}
             />
           </View>
           <View style={styles({schema}).userBox}>
-            <Image source={dp} />
+            <Image source={dp} style={styles({schema}).bgImg} />
             <View
               style={{
                 alignItems: 'flex-start',
-                gap: 10,
-                width: '75%',
+                flex: 1,
                 flexDirection: 'row',
               }}>
               <View
@@ -60,7 +66,7 @@ const ChattingScreen = ({navigation, route}) => {
                   flexDirection: 'row',
                   width: '100%',
                 }}>
-                <View style={{gap: 10, alignItems: 'flex-start'}}>
+                <View style={{gap: heightPixel(10), alignItems: 'flex-start'}}>
                   <CustomText
                     TEXT={name}
                     FAMILY={theme.fonts.BentonSans_Medium}
@@ -89,9 +95,8 @@ const ChattingScreen = ({navigation, route}) => {
           </View>
           <View style={styles({schema}).chatBox}>
             <Input
-              py={5}
               backgroundColor={'white'}
-              borderRadius={12}
+              borderRadius={heightPixel(12)}
               multiline={true}
               value={text}
               onChangeText={text => {
@@ -111,7 +116,7 @@ const ChattingScreen = ({navigation, route}) => {
                     </TouchableOpacity>
                   }
                   mr="4"
-                  size={6}
+                  size={heightPixel(6)}
                 />
               }
             />
@@ -134,10 +139,10 @@ const ChatText = ({
         maxWidth: widthPercentageToDP('80%'),
         backgroundColor: bgColor,
         alignSelf: position,
-        padding: 14,
-        borderRadius: 12,
+        padding: heightPixel(14),
+        borderRadius: heightPixel(12),
         alignItems: 'flex-start',
-        marginVertical: 5,
+        marginVertical: heightPixel(5),
       }}>
       <CustomText TEXT={msg} COLOR={textColor} />
     </View>

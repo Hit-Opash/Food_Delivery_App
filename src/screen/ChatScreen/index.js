@@ -17,6 +17,7 @@ import {String} from '../../common/strings';
 import {theme} from '../../theme';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {Screens} from '../../common/screen';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 
 const ChatScreen = ({navigation}) => {
   const schema = useColorScheme();
@@ -57,7 +58,7 @@ const ChatScreen = ({navigation}) => {
           <CustomText
             TEXT={String.Chat}
             FAMILY={theme.fonts.BentonSans_Bold}
-            SIZE={22}
+            SIZE={fontPixel(22)}
             CUSTOM_STYLE={{alignSelf: 'flex-start'}}
           />
           <FlatList
@@ -76,24 +77,26 @@ const ChatScreen = ({navigation}) => {
 const UserList = ({user, schema, navigation}) => {
   return (
     <TouchableOpacity
-      style={styles({schema}).userBox}
       onPress={() => {
         navigation.navigate(Screens.ChattingScreen, {
           data: user,
         });
       }}>
-      <Image source={user.dp} />
-      <View style={{alignItems: 'flex-start', gap: 10, width: '75%'}}>
-        <View style={{width: '100%'}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <CustomText
-              TEXT={user.name}
-              FAMILY={theme.fonts.BentonSans_Medium}
-            />
-            <CustomText TEXT={user.time} />
+      <View style={styles({schema}).userBox}>
+        <Image source={user.dp} style={styles({schema}).dpImg} />
+        <View style={{alignItems: 'flex-start', gap: heightPixel(10), flex: 1}}>
+          <View style={{width: '100%'}}>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <CustomText
+                TEXT={user.name}
+                FAMILY={theme.fonts.BentonSans_Medium}
+              />
+              <CustomText TEXT={user.time} />
+            </View>
           </View>
+          <CustomText TEXT={user.desk} />
         </View>
-        <CustomText TEXT={user.desk} />
       </View>
     </TouchableOpacity>
   );

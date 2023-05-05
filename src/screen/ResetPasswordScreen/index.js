@@ -36,7 +36,14 @@ const ResetPasswordScreen = ({navigation}) => {
             onPress={() => {
               navigation.pop();
             }}>
-            <Image source={Images.Back} />
+            <Image
+              source={Images.Back}
+              style={{
+                width: heightPixel(48),
+                height: undefined,
+                aspectRatio: 1,
+              }}
+            />
           </TouchableOpacity>
           <CustomText
             SIZE={fontPixel(24)} //25
@@ -65,6 +72,7 @@ const ResetPasswordScreen = ({navigation}) => {
           <Stack space={heightPixel(4)} w="100%" alignItems="center">
             <Input
               type={show ? 'text' : 'password'}
+              py={4}
               color={theme.colors[schema].text}
               autoCapitalize="none"
               fontSize={fontPixel(16)}
@@ -87,6 +95,7 @@ const ResetPasswordScreen = ({navigation}) => {
             />
             <Input
               type={show ? 'text' : 'password'}
+              py={4}
               fontSize={theme.size[3]}
               color={theme.colors[schema].text}
               autoCapitalize="none"
