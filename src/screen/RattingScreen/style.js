@@ -4,7 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import { widthPixel } from '../../scale/scaling';
+import { heightPixel, widthPixel } from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -14,27 +14,28 @@ export const styles = ({schema}) =>
       position: 'absolute',
     },
     tickImg: {
-      flex: 1,
       width: wp('40%'),
       justifyContent: 'flex-end',
     },
     img: {
-      resizeMode: 'contain',
       width: wp('40%'),
+      height: undefined,
+      aspectRatio: 1,
+      resizeMode: 'cover',
+      borderWidth: widthPixel(5),
+      borderRadius: wp('20%'),
+      borderColor: 'green',
     },
-    msgPart: {
-      flex: 1,
-    },
+    msgPart: {},
     textContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 15,
+      gap: heightPixel(24),
     },
     customRatingBarStyle: {
       justifyContent: 'center',
       flexDirection: 'row',
-      marginTop: 30,
       gap: widthPixel(10),
     },
     starImageStyle: {
@@ -42,6 +43,9 @@ export const styles = ({schema}) =>
       height: undefined,
       aspectRatio: 1,
       resizeMode: 'cover',
+    },
+    bottomContainer: {
+      gap: heightPixel(20),
     },
     chatBox: {
       width: wp('90%'),
@@ -59,5 +63,10 @@ export const styles = ({schema}) =>
     skipButton: {
       colors: 'white',
       width: wp('30%'),
+      justifyContent: 'center',
+      borderRadius: heightPixel(16),
+      borderColor: theme.colors[schema].text,
+      borderWidth: 1,
+      backgroundColor: 'white',
     },
   });

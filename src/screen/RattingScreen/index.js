@@ -75,21 +75,22 @@ const RattingScreen = ({navigation, route}) => {
               TEXT={title}
               LINE_HEIGHT={heightPixel(32)} //30
             />
-            <CustomText
-              SIZE={fontPixel(14)} //22
-              FAMILY={theme.fonts.BentonSans_Book}
-              TEXT={desc}
-              LINE_HEIGHT={heightPixel(14)} //30
-            />
-            <CustomRatingBar />
           </View>
+          <CustomText
+            SIZE={fontPixel(14)} //22
+            FAMILY={theme.fonts.BentonSans_Book}
+            TEXT={desc}
+            LINE_HEIGHT={heightPixel(14)} //30
+          />
+          <CustomRatingBar />
         </View>
-        <View style={styles({schema}).button}>
+        <View style={styles({schema}).bottomContainer}>
           <View style={styles({schema}).chatBox}>
             <Input
               backgroundColor={'white'}
               borderRadius={heightPixel(12)}
               multiline={true}
+              placeholder={String.Leave_Feedback}
               InputLeftElement={
                 <Icon
                   as={<Image source={Images.Edit_Icon} />}
@@ -104,18 +105,18 @@ const RattingScreen = ({navigation, route}) => {
               title={String.Submit}
               style={styles({schema}).submitButton}
               onPress={() => {
-                navigation.popToTop();
+                // navigation.popToTop();
                 navigation.replace(Screens.BottomTab);
               }}
             />
-            <CustomButton
-              title={String.Skip}
+            <TouchableOpacity
               style={styles({schema}).skipButton}
               onPress={() => {
-                navigation.popToTop();
+                // navigation.popToTop();
                 navigation.replace(Screens.BottomTab);
-              }}
-            />
+              }}>
+              <CustomText TEXT={String.Skip} SIZE={heightPixel(16)} />
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>

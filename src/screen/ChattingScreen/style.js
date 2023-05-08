@@ -42,5 +42,6 @@ export const styles = ({schema}) =>
     bgImg: {
       flex: 0.3,
       resizeMode: 'contain',
+      aspectRatio: 1,
     },
   });

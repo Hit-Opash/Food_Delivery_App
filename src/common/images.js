@@ -46,4 +46,19 @@ export const Images = {
   Blur_Star: require('../../assets/images/RattingScreen/Blur_Star.png'),
   Fill_Star: require('../../assets/images/RattingScreen/Fill_Star.png'),
   Edit_Icon: require('../../assets/images/RattingScreen/Edit_Icon.png'),
+
+  voucher_2: require('../../assets/images/VoucherScreen/Voucher_2.png'),
+  voucher_3: require('../../assets/images/VoucherScreen/Voucher_3.png'),
+
+  Checked_Icon: require('../../assets/images/NotificationScreen/Checked_Icon.png'),
+  Cross_Icon: require('../../assets/images/NotificationScreen/Cross_Icon.png'),
+  Money_Icon: require('../../assets/images/NotificationScreen/Money_Icon.png'),
+
+  Call_End_Icon: require('../../assets/images/CallScreen/Close_Icon.png'),
+  Speaker_Icon: require('../../assets/images/CallScreen/Speaker_Icon.png'),
+  Minus_Icon: require('../../assets/images/OrderDetailsScreen/Minus_Icon.png'),
+  Plus_Icon: require('../../assets/images/OrderDetailsScreen/Plus_Icon.png'),
+
+  Edit_Pencil_Icon: require('../../assets/images/ProfileScreen/Edit_Icon.png'),
+  Voucher_Icon: require('../../assets/images/ProfileScreen/Voucher_Icon.png'),
 };

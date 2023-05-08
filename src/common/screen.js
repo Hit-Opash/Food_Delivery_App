@@ -22,5 +22,8 @@ export const Screens = {
   ChattingScreen: 'ChattingScreen',
   SearchScreen: 'SearchScreen',
   RattingScreen: 'RattingScreen',
-  VoucherScreen: 'VoucherSreen',
+  VoucherScreen: 'VoucherScreen',
+  NotificationScreen: 'NotificationScreen',
+  CallScreen: 'CallScreen',
+  OrderDetailsScreen: 'OrderDetailsScreen',
 };

@@ -32,5 +32,6 @@ export const styles = ({schema}) =>
     dpImg: {
       flex: 0.3,
       resizeMode: 'contain',
+      aspectRatio: 1, //important
     },
   });

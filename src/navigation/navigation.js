@@ -39,6 +39,9 @@ import {heightPixel} from '../scale/scaling';
 import SearchScreen from '../screen/SearchScreen';
 import RattingScreen from '../screen/RattingScreen';
 import VoucherScreen from '../screen/VoucherScreen';
+import NotificationScreen from '../screen/NotificationScreen';
+import CallScreen from '../screen/CallScreen';
+import OrderDetailsScreen from '../screen/OrderDetailsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +94,9 @@ const Navigation = () => {
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="RattingScreen" component={RattingScreen} />
       <Stack.Screen name="VoucherScreen" component={VoucherScreen} />
+      <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+      <Stack.Screen name="CallScreen" component={CallScreen} />
+      <Stack.Screen name="OrderDetailsScreen" component={OrderDetailsScreen} />
     </Stack.Navigator>
   );
 };
@@ -154,6 +160,12 @@ const TabButton = props => {
           ]}>
           <Image
             source={item.icon}
+            style={{
+              width: 20,
+              height: undefined,
+              aspectRatio: 1,
+              resizeMode: 'contain',
+            }}
             // color={focused ? Colors.white : Colors.primary}
           />
           <View ref={textViewRef}>

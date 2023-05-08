@@ -15,27 +15,26 @@ export const styles = ({schema}) =>
       opacity: 0.2,
     },
     rootContainer: {
-      alignSelf: 'center',
       gap: heightPixel(20),
       marginBottom: 20,
+      marginHorizontal: wp('5%'),
     },
-    adsImg: {
-      borderRadius: heightPixel(16),
+    img: {
+      width: wp('12%'),
+      height: undefined,
+      resizeMode: 'contain',
+      aspectRatio: 1,
+      alignSelf: 'center',
     },
-    offerBg: {
-      width: wp('90%'),
-    },
-    textPart: {
-      width: wp('45%'),
-      alignSelf: 'flex-end',
-      gap: heightPixel(10),
-      paddingVertical: heightPixel(20),
-      paddingRight: heightPixel(15),
-    },
-    orderButtom: {
-      alignSelf: 'flex-start',
+    msgContainer: {
+      flexDirection: 'row',
       backgroundColor: 'white',
       borderRadius: heightPixel(16),
-      padding: heightPixel(14),
+      padding: 24,
     },
+    textPart: {
+      justifyContent: 'center',
+      gap: 5,
+      marginLeft: 10,
+    }
   });

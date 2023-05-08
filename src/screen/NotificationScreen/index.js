@@ -19,19 +19,28 @@ import {Screens} from '../../common/screen';
 import {fontPixel, heightPixel} from '../../scale/scaling';
 import {Rating} from 'react-native-ratings';
 import {Icon, Input} from 'native-base';
+import {widthPercentageToDP} from 'react-native-responsive-screen';
 
-const VoucherScreen = ({navigation}) => {
+const NotificationScreen = ({navigation}) => {
   const schema = useColorScheme();
-  const offer = [
+  const notification = [
     {
       id: 1,
-      img: Images.voucher_2,
-      month: 'October',
+      img: Images.Checked_Icon,
+      msg: 'Your order has been taken by the driver',
+      time: 'Recently',
     },
     {
       id: 2,
-      img: Images.voucher_3,
-      month: 'October',
+      img: Images.Cross_Icon,
+      msg: 'Topup for $100 was successful',
+      time: '10.00 Am',
+    },
+    {
+      id: 3,
+      img: Images.Money_Icon,
+      msg: 'Your order has been canceled',
+      time: '22 Juny 2021',
     },
   ];
   return (
@@ -39,6 +48,7 @@ const VoucherScreen = ({navigation}) => {
       <ImageBackground
         source={Images.BackGroung2}
         style={styles({schema}).bg_img}
+        resizeMode={'contain'}
       />
       <SafeAreaView style={{flex: 1}}>
         <ScrollView>
@@ -58,38 +68,37 @@ const VoucherScreen = ({navigation}) => {
             </TouchableOpacity>
             <CustomText
               SIZE={fontPixel(24)} //24
-              TEXT={String.Voucher_Promo}
+              TEXT={String.Notification}
               FAMILY={theme.fonts.BentonSans_Bold}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
-            {offer.map(element => {
+            {notification.map(element => {
               return (
                 <TouchableOpacity>
-                  <View style={styles({schema}).offerBg}>
-                    <ImageBackground
-                      source={element.img}
-                      imageStyle={{borderRadius: heightPixel(16)}}
-                      resizeMode={'stretch'}
-                      style={styles({schema}).adsImg}>
-                      <View style={styles({schema}).textPart}>
-                        <CustomText
-                          TEXT={String.Special_Deal_For}
-                          SIZE={20}
-                          CUSTOM_STYLE={{alignSelf: 'flex-start'}}
-                        />
-                        <CustomText
-                          TEXT={element.month}
-                          SIZE={20}
-                          CUSTOM_STYLE={{alignSelf: 'flex-start'}}
-                        />
-                        <TouchableOpacity style={styles({schema}).orderButtom}>
-                          <CustomText
-                            TEXT={String.Order_Now}
-                            SIZE={heightPixel(14)}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </ImageBackground>
+                  <View style={styles({schema}).msgContainer}>
+                    <Image source={element.img} style={styles({schema}).img} />
+                    <View style={styles({schema}).textPart}>
+                      <CustomText
+                        TEXT={element.msg}
+                        FAMILY={theme.fonts.BentonSans_Medium}
+                        SIZE={heightPixel(16)}
+                        LINE_HEIGHT={heightPixel(20)}
+                        CUSTOM_STYLE={{
+                          alignSelf: 'flex-start',
+                          textAlign: 'left',
+                          width: widthPercentageToDP('60%'),
+                        }}
+                      />
+                      <CustomText
+                        TEXT={element.time}
+                        LINE_HEIGHT={heightPixel(14)}
+                        CUSTOM_STYLE={{
+                          alignSelf: 'flex-start',
+                          textAlign: 'left',
+                          flexWrap: 'wrap',
+                        }}
+                      />
+                    </View>
                   </View>
                 </TouchableOpacity>
               );
@@ -101,4 +110,4 @@ const VoucherScreen = ({navigation}) => {
   );
 };
 
-export default VoucherScreen;
+export default NotificationScreen;

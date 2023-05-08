@@ -25,10 +25,13 @@ const SplashScreen = ({navigation}) => {
     const IsFirstTime = await AsyncStorage.getItem(Key.IsFirstTime);
     Log({msg: `IsFirstTime Launch: ${IsFirstTime}`});
     if (IsFirstTime || IsFirstTime == null) {
-      navigation.replace(Screens.FeatureScreen1, {
-        title: String.Order_Completed,
-        desc: 'Please rate your last Driver',
-        img: Images.Restaurant_2,
+      navigation.replace(Screens.BottomTab, {
+        // title: String.Order_Completed,
+        // desc: 'Please rate your last Driver',
+        // img: Images.Restaurant_2,
+        name: 'Hit Doshi',
+        number: '9999999999',
+        img: Images.Profile_Img,
       });
     } else {
       navigation.replace(Screens.SignInScreen);
