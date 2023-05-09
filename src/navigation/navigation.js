@@ -250,6 +250,7 @@ const styles = ({schema}) =>
 //           marginBottom: 30,
 //           borderRadius: theme.size[6],
 //         },
+
 //         headerShown: false,
 //         tabBarLabelPosition: 'beside-icon',
 //       }}>
