@@ -91,11 +91,12 @@ const UserList = ({user, schema, navigation}) => {
               <CustomText
                 TEXT={user.name}
                 FAMILY={theme.fonts.BentonSans_Medium}
+                SIZE={heightPixel(15)}
               />
-              <CustomText TEXT={user.time} />
+              <CustomText TEXT={user.time} SIZE={heightPixel(14)} />
             </View>
           </View>
-          <CustomText TEXT={user.desk} />
+          <CustomText TEXT={user.desk} SIZE={heightPixel(14)} />
         </View>
       </View>
     </TouchableOpacity>

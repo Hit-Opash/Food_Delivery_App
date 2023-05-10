@@ -9,7 +9,7 @@ export const styles = ({schema}) =>
   StyleSheet.create({
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
     },
@@ -18,14 +18,13 @@ export const styles = ({schema}) =>
       alignItems: 'flex-start',
       alignSelf: 'center',
       marginHorizontal: hp('5%'),
-      marginTop: hp('5%'),
       flex: 1,
     },
     userBox: {
       flexDirection: 'row',
       width: wp('90%'),
       padding: wp('3%'),
-      backgroundColor: 'white',
+      backgroundColor: theme.colors[schema].cardColor,
       gap: widthPixel(10),
       borderRadius: heightPixel(16),
       alignItems: 'center',
@@ -33,15 +32,16 @@ export const styles = ({schema}) =>
     chatBox: {
       width: wp('90%'),
       position: 'absolute',
-      bottom: 0,
+      bottom: 20,
     },
     scrollView: {
       paddingRight: heightPixel(15),
       height: '55%',
     },
     bgImg: {
-      flex: 0.3,
+      width: wp('15%'),
+      height: undefined,
+      aspectRatio: 1, //Important
       resizeMode: 'contain',
-      aspectRatio: 1,
     },
   });

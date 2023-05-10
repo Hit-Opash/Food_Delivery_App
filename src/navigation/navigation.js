@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
   Image,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -35,13 +36,16 @@ import ProfileScreen from '../screen/ProfileScreen';
 import ShopScreen from '../screen/ShopScreen';
 import ChatScreen from '../screen/ChatScreen';
 import ChattingScreen from '../screen/ChattingScreen';
-import {heightPixel} from '../scale/scaling';
+import {heightPixel, widthPixel} from '../scale/scaling';
 import SearchScreen from '../screen/SearchScreen';
 import RattingScreen from '../screen/RattingScreen';
 import VoucherScreen from '../screen/VoucherScreen';
 import NotificationScreen from '../screen/NotificationScreen';
 import CallScreen from '../screen/CallScreen';
 import OrderDetailsScreen from '../screen/OrderDetailsScreen';
+import ConfirmOrderScreen from '../screen/ConfirmOrderScreen';
+import SetMapLocationScreen from '../screen/SetMapLocationScreen';
+import TrackOrderScreen from '../screen/TrackOrderScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -97,6 +101,12 @@ const Navigation = () => {
       <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
       <Stack.Screen name="CallScreen" component={CallScreen} />
       <Stack.Screen name="OrderDetailsScreen" component={OrderDetailsScreen} />
+      <Stack.Screen name="ConfirmOrderScreen" component={ConfirmOrderScreen} />
+      <Stack.Screen
+        name="SetMapLocationScreen"
+        component={SetMapLocationScreen}
+      />
+      <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
     </Stack.Navigator>
   );
 };
@@ -119,7 +129,7 @@ const TabArr = [
     route: 'Shop',
     label: 'Shop',
     icon: Images.Shop_Menu,
-    component: ShopScreen,
+    component: OrderDetailsScreen,
   },
   {
     route: 'Chat',
@@ -161,7 +171,7 @@ const TabButton = props => {
           <Image
             source={item.icon}
             style={{
-              width: 20,
+              width: widthPixel(20),
               height: undefined,
               aspectRatio: 1,
               resizeMode: 'contain',
@@ -186,9 +196,10 @@ export function CustomTab() {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          margin: wp('5%'),
+          marginHorizontal: wp('5%'),
+          marginBottom: Platform.OS == 'ios' ? 24 : 12,
           borderRadius: heightPixel(16),
-          padding: heightPixel(30),
+          padding: Platform.OS == 'ios' ? heightPixel(30) : heightPixel(3),
           height: heightPixel(72),
         },
       }}>
@@ -216,20 +227,21 @@ const styles = ({schema}) =>
       alignItems: 'center',
     },
     btn: {
-      height: 45,
+      height: heightPixel(45),
       flexDirection: 'row',
       alignItems: 'center',
-      borderRadius: 16,
+      borderRadius: heightPixel(16),
     },
     focusBtn: {
-      backgroundColor: 'lightgreen',
+      backgroundColor: '#15BE77',
       justifyContent: 'center',
-      width: 105,
+      width: widthPixel(100),
+      // opacity: 0.7,
     },
     focuseText: {
       color: theme.colors[schema].text,
-      paddingHorizontal: 8,
-      fontSize: 14,
+      paddingHorizontal: widthPixel(8),
+      fontSize: heightPixel(14),
     },
   });
 

@@ -25,13 +25,13 @@ const SplashScreen = ({navigation}) => {
     const IsFirstTime = await AsyncStorage.getItem(Key.IsFirstTime);
     Log({msg: `IsFirstTime Launch: ${IsFirstTime}`});
     if (IsFirstTime || IsFirstTime == null) {
-      navigation.replace(Screens.BottomTab, {
-        // title: String.Order_Completed,
-        // desc: 'Please rate your last Driver',
-        // img: Images.Restaurant_2,
+      navigation.replace(Screens.FeatureScreen1, {
+        title: String.Order_Completed,
+        desc: 'Please rate your last Driver',
+        img: Images.Restaurant_2,
         name: 'Hit Doshi',
         number: '9999999999',
-        img: Images.Profile_Img,
+        // img: Images.Profile_Img,
       });
     } else {
       navigation.replace(Screens.SignInScreen);
@@ -55,10 +55,11 @@ const LogoComponent1 = () => {
       </View>
       <View style={styles({schema}).textPart}>
         <CustomText
-          COLOR={theme.colors[schema].text}
+          // COLOR={theme.colors[schema].text}
           SIZE={fontPixel(35)}
           TEXT={String.App_Title_1}
           FAMILY={theme.fonts.Viga_Regular}
+          COLOR={'#53E88B'}
         />
         <CustomText
           COLOR={theme.colors[schema].text}

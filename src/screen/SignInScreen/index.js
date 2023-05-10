@@ -4,6 +4,7 @@ import {
   Image,
   ImageBackground,
   Keyboard,
+  Platform,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -23,6 +24,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import * as yup from 'yup';
 import {Formik} from 'formik';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {inputSize} from '../../theme/sizes';
 
 const SignInScreen = ({navigation}) => {
   const schema = useColorScheme();
@@ -124,78 +126,88 @@ const SignInScreen = ({navigation}) => {
                   <View style={styles({schema}).container_2}>
                     <View>
                       <Stack space={4} w="100%" alignItems="center">
-                        <Input
-                          width="90%"
-                          // height={heightOfInput}
-                          // size={heightOfInput}
-                          name="email"
-                          onChangeText={handleChange('email')}
-                          onBlur={handleBlur('email')}
-                          value={values.email}
-                          color={theme.colors[schema].text}
-                          autoCapitalize="none"
-                          pl={4}
-                          padding={heightPixel(3)}
-                          // InputLeftElement={
-                          //   <Icon
-                          //     as={<Image source={Images.Message} />}
-                          //     ml="4"
-                          //     size={heightPixel(6)}
-                          //   />
-                          // }
-                          placeholder={String.Email}
-                          fontSize={fontPixel(16)}
-                          borderRadius={heightPixel(16)}
-                        />
-                        {errors.email && touched.email && (
-                          <View style={styles({schema}).errorDisplayContainer}>
-                            <Icon
-                              as={<MaterialIcons name={'error'} />}
-                              size="3"
-                              mr={1}
-                              ml={2}
-                              color="#FF0000"
-                            />
-                            <Text style={styles({schema}).errorText}>
-                              {errors.email}
-                            </Text>
-                          </View>
-                        )}
-                        <Input
-                          width="90%"
-                          name="password"
-                          onChangeText={handleChange('password')}
-                          onBlur={handleBlur('password')}
-                          value={values.password}
-                          color={theme.colors[schema].text}
-                          autoCapitalize="none"
-                          pl={4}
-                          padding={heightPixel(3)}
-                          // InputLeftElement={
-                          //   <Icon
-                          //     as={<Image source={Images.Lock} />}
-                          //     ml="4"
-                          //     size={heightPixel(6)}
-                          //   />
-                          // }
-                          placeholder={String.Password}
-                          fontSize={fontPixel(16)}
-                          borderRadius={heightPixel(16)}
-                        />
-                        {errors.password && touched.password && (
-                          <View style={styles({schema}).errorDisplayContainer}>
-                            <Icon
-                              as={<MaterialIcons name={'error'} />}
-                              size="3"
-                              mr={1}
-                              ml={2}
-                              color="#FF0000"
-                            />
-                            <Text style={styles({schema}).errorText}>
-                              {errors.password}
-                            </Text>
-                          </View>
-                        )}
+                        <View>
+                          <Input
+                            width="90%"
+                            // height={heightOfInput}
+                            // size={heightOfInput}
+                            py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                            name="email"
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                            color={theme.colors[schema].text}
+                            autoCapitalize="none"
+                            pl={4}
+                            padding={heightPixel(3)}
+                            // InputLeftElement={
+                            //   <Icon
+                            //     as={<Image source={Images.Message} />}
+                            //     ml="4"
+                            //     size={heightPixel(6)}
+                            //   />
+                            // }
+                            placeholder={String.Email}
+                            fontSize={fontPixel(16)}
+                            borderRadius={heightPixel(16)}
+                          />
+                          {errors.email && touched.email && (
+                            <View
+                              style={styles({schema}).errorDisplayContainer}>
+                              <Icon
+                                as={<MaterialIcons name={'error'} />}
+                                size="3"
+                                mr={1}
+                                ml={2}
+                                color="#FF0000"
+                              />
+                              <Text style={styles({schema}).errorText}>
+                                {errors.email}
+                              </Text>
+                            </View>
+                          )}
+                        </View>
+
+                        <View>
+                          <Input
+                            width="90%"
+                            name="password"
+                            py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.password}
+                            color={theme.colors[schema].text}
+                            autoCapitalize="none"
+                            pl={4}
+                            padding={heightPixel(3)}
+                            // InputLeftElement={
+                            //   <Icon
+                            //     as={<Image source={Images.Lock} />}
+                            //     ml="4"
+                            //     size={heightPixel(6)}
+                            //   />
+                            // }
+                            placeholder={String.Password}
+                            fontSize={fontPixel(16)}
+                            borderRadius={heightPixel(16)}
+                          />
+
+                          {errors.password && touched.password && (
+                            <View
+                              style={styles({schema}).errorDisplayContainer}>
+                              <Icon
+                                as={<MaterialIcons name={'error'} />}
+                                size="3"
+                                mr={1}
+                                ml={2}
+                                color="#FF0000"
+                              />
+                              <Text style={styles({schema}).errorText}>
+                                {errors.password}
+                              </Text>
+                            </View>
+                          )}
+                        </View>
                         <CustomText
                           SIZE={fontPixel(12)}
                           TEXT={String.Or_Continue_With}
@@ -241,7 +253,7 @@ const SignInScreen = ({navigation}) => {
                     <Stack space={heightPixel(4)} w="100%">
                       <TouchableOpacity
                         onPress={() => {
-                          navigation.navigate('ForgotPassMethodScreen');
+                          navigation.navigate(Screens.ForgotPassMethodScreen);
                         }}>
                         <CustomText
                           TEXT={String.Forgot_Your_Password}
@@ -254,7 +266,7 @@ const SignInScreen = ({navigation}) => {
                       <CustomButton
                         title={String.Login}
                         onPress={() => {
-                          navigation.replace(Screens.HomeScreen);
+                          navigation.replace(Screens.BottomTab);
                         }}
                       />
                     </Stack>

@@ -10,31 +10,32 @@ export const styles = ({schema}) =>
     setLocation_container: {
       flex: 1,
       margin: wp('5%'),
-      gap: 20,
+      gap: heightPixel(20),
       marginBottom: wp('4%'),
     },
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
     },
     setLocation_Container: {
-      borderRadius: theme.size[6], //22
-      padding: 10,
-      gap: 20,
-      borderWidth: 1,
-      borderColor: theme.colors[schema].text,
+      borderRadius: heightPixel(22), //22
+      padding: heightPixel(10),
+      gap: heightPixel(20),
+      // borderWidth: 1,
+      // borderColor: theme.colors[schema].text,
+      backgroundColor: theme.colors[schema].cardColor,
     },
     topPart: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: 20,
+      gap: heightPixel(20),
     },
     setLocation_Button: {
       borderRadius: theme.size[4], //16
-      backgroundColor: theme.colors[schema].creamy,
-      padding: 20,
+      backgroundColor: 'silver',
+      padding: heightPixel(20),
     },
     img: {
       width: heightPixel(40),

@@ -26,8 +26,8 @@ export const String = {
   Google: 'Google',
   Login: 'Login',
   Forgot_Password: 'Forgot password?',
-  Forgot_Discreption:
-    'Select which contact details should we use to reset your password',
+  Forgot_D1: 'Select which contact details should we ',
+  Forgot_D2: 'use to reset your password',
   Via_SMS: 'Via sms:',
   Via_EMAIL: 'Via email:',
   OTP_Screen_T1: 'Enter 4-digit',
@@ -94,4 +94,9 @@ export const String = {
   Member_Gold: 'Member Gold',
   Favourite: 'Favourite',
   Buy_Again: 'Buy Again',
+  Confirm_Order: 'Confirm Order',
+  Deliver_To: 'Deliver To',
+  Edit: 'Edit',
+  Track_Orders: 'Track Orders',
+  Call: 'Call',
 };

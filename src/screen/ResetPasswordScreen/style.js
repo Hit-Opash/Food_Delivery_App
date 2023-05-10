@@ -3,37 +3,21 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {heightPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
     forgotPass_container: {
       flex: 1,
       margin: wp('5%'),
-      gap: 20,
+      gap: heightPixel(20),
       marginBottom: wp('4%'),
     },
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
-    },
-    method_Container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 20,
-      borderRadius: theme.size[2],
-      borderColor: theme.colors[schema].border_color,
-      borderWidth: 1,
-      padding: theme.space[2],
-    },
-    methodData_Container: {
-      gap: 12,
-    },
-    data: {
-      flexDirection: 'row',
-      gap: 10,
-      alignItems: 'center',
     },
     button: {
       flex: 1,

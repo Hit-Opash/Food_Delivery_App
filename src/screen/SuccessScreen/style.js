@@ -4,6 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import { heightPixel } from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -17,7 +18,6 @@ export const styles = ({schema}) =>
       margin: hp('5%'),
     },
     tickImg: {
-      flex: 1,
       width: wp('40%'),
       justifyContent: 'flex-end',
     },
@@ -25,14 +25,12 @@ export const styles = ({schema}) =>
       resizeMode: 'contain',
       width: wp('40%'),
     },
-    msgPart: {
-      flex: 1,
-    },
+    msgPart: {},
     textContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 15,
+      gap: heightPixel(20),
     },
     button: {},
   });

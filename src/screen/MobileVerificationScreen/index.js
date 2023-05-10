@@ -76,7 +76,7 @@ const MobileVerificaionScreen = ({navigation}) => {
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
-          <OTPInputView
+          {/* <OTPInputView
             style={styles({schema}).otpInput}
             pinCount={4}
             // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
@@ -87,7 +87,7 @@ const MobileVerificaionScreen = ({navigation}) => {
             onCodeFilled={code => {
               console.log(`Code is ${code}, you are good to go!`);
             }}
-          />
+          /> */}
           <View style={styles({schema}).button}>
             <CustomButton
               title={String.Next}

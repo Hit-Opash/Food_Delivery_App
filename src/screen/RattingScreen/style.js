@@ -4,7 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import { heightPixel, widthPixel } from '../../scale/scaling';
+import {heightPixel, widthPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -37,9 +37,10 @@ export const styles = ({schema}) =>
       justifyContent: 'center',
       flexDirection: 'row',
       gap: widthPixel(10),
+      marginBottom: heightPixel(40),
     },
     starImageStyle: {
-      width: widthPixel(40),
+      width: widthPixel(30),
       height: undefined,
       aspectRatio: 1,
       resizeMode: 'cover',
@@ -61,12 +62,11 @@ export const styles = ({schema}) =>
       width: wp('55%'),
     },
     skipButton: {
-      colors: 'white',
       width: wp('30%'),
       justifyContent: 'center',
       borderRadius: heightPixel(16),
-      borderColor: theme.colors[schema].text,
-      borderWidth: 1,
-      backgroundColor: 'white',
+      // borderColor: theme.colors[schema].text,
+      // borderWidth: 1,
+      backgroundColor: theme.colors[schema].cardColor,
     },
   });

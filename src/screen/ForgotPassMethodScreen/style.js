@@ -16,7 +16,7 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
     },
@@ -25,8 +25,8 @@ export const styles = ({schema}) =>
       alignItems: 'center',
       gap: widthPixel(20),
       borderRadius: heightPixel(22), //22
-      borderColor: theme.colors[schema].text,
-      borderWidth: 1,
+      // borderColor: theme.colors[schema].text,
+      // borderWidth: 1,
       padding: heightPixel(24),
     },
     methodData_Container: {
@@ -34,7 +34,7 @@ export const styles = ({schema}) =>
     },
     data: {
       flexDirection: 'row',
-      gap: widthPixel(10),
+      gap: heightPixel(8),
       alignItems: 'center',
     },
     button: {

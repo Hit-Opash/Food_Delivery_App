@@ -35,6 +35,7 @@ import {Formik} from 'formik';
 import {Key} from '../../common/storagekey';
 import {Log} from '../../common/displayLog';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {inputSize} from '../../theme/sizes';
 
 const SignUpScreen = ({navigation}) => {
   console.log(useWindowDimensions());
@@ -141,113 +142,122 @@ const SignUpScreen = ({navigation}) => {
                           space={heightPixel(2)}
                           w="100%"
                           alignItems="center">
-                          <Input
-                            name="userName"
-                            width="90%"
-                            py={4}
-                            color={theme.colors[schema].text}
-                            onChangeText={handleChange('userName')}
-                            onBlur={handleBlur('userName')}
-                            value={values.userName}
-                            autoCapitalize="none"
-                            InputLeftElement={
-                              <Icon
-                                as={<Image source={Images.Profile} />}
-                                ml="4"
-                                size={heightPixel(6)}
-                              />
-                            }
-                            placeholder={String.Anamwp}
-                            fontSize={fontPixel(16)}
-                            borderRadius={heightPixel(16)}
-                            style={styles({schema}).input}
-                          />
-                          {errors.userName && touched.userName && (
-                            <View
-                              style={styles({schema}).errorDisplayContainer}>
-                              <Icon
-                                as={<MaterialIcons name={'error'} />}
-                                size="3"
-                                mr={1}
-                                ml={2}
-                                color="#FF0000"
-                              />
-                              <Text style={styles({schema}).errorText}>
-                                {errors.userName}
-                              </Text>
-                            </View>
-                          )}
-                          <Input
-                            name="email"
-                            width="90%"
-                            py={4}
-                            color={theme.colors[schema].text}
-                            autoCapitalize="none"
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
-                            keyboardType="email-address"
-                            InputLeftElement={
-                              <Icon
-                                as={<Image source={Images.Email_1} />}
-                                ml="4"
-                                size={heightPixel(6)}
-                              />
-                            }
-                            placeholder={String.Email}
-                            fontSize={fontPixel(16)}
-                            borderRadius={heightPixel(16)}
-                          />
-                          {errors.email && touched.email && (
-                            <View
-                              style={styles({schema}).errorDisplayContainer}>
-                              <Icon
-                                as={<MaterialIcons name={'error'} />}
-                                size="3"
-                                mr={1}
-                                ml={2}
-                                color="#FF0000"
-                              />
-                              <Text style={styles({schema}).errorText}>
-                                {errors.email}
-                              </Text>
-                            </View>
-                          )}
-                          <Input
-                            name="password"
-                            width="90%"
-                            py={4}
-                            color={theme.colors[schema].text}
-                            onChangeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            autoCapitalize="none"
-                            InputLeftElement={
-                              <Icon
-                                as={<Image source={Images.Password} />}
-                                ml="4"
-                                size={heightPixel(6)}
-                              />
-                            }
-                            placeholder={String.Password}
-                            fontSize={fontPixel(16)}
-                            borderRadius={heightPixel(16)}
-                          />
-                          {errors.password && touched.password && (
-                            <View
-                              style={styles({schema}).errorDisplayContainer}>
-                              <Icon
-                                as={<MaterialIcons name={'error'} />}
-                                size="3"
-                                mr={1}
-                                ml={2}
-                                color="#FF0000"
-                              />
-                              <Text style={styles({schema}).errorText}>
-                                {errors.password}
-                              </Text>
-                            </View>
-                          )}
+                          <View>
+                            <Input
+                              name="userName"
+                              width="90%"
+                              py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                              color={theme.colors[schema].text}
+                              onChangeText={handleChange('userName')}
+                              onBlur={handleBlur('userName')}
+                              value={values.userName}
+                              autoCapitalize="none"
+                              InputLeftElement={
+                                <Icon
+                                  as={<Image source={Images.Profile} />}
+                                  ml="4"
+                                  size={heightPixel(6)}
+                                />
+                              }
+                              placeholder={String.Anamwp}
+                              fontSize={fontPixel(16)}
+                              borderRadius={heightPixel(16)}
+                              style={styles({schema}).input}
+                            />
+                            {errors.userName && touched.userName && (
+                              <View
+                                style={styles({schema}).errorDisplayContainer}>
+                                <Icon
+                                  as={<MaterialIcons name={'error'} />}
+                                  size="3"
+                                  mr={1}
+                                  mt={1}
+                                  ml={2}
+                                  color="#FF0000"
+                                />
+                                <Text style={styles({schema}).errorText}>
+                                  {errors.userName}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                          <View>
+                            <Input
+                              name="email"
+                              width="90%"
+                              py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                              color={theme.colors[schema].text}
+                              autoCapitalize="none"
+                              onChangeText={handleChange('email')}
+                              onBlur={handleBlur('email')}
+                              value={values.email}
+                              keyboardType="email-address"
+                              InputLeftElement={
+                                <Icon
+                                  as={<Image source={Images.Email_1} />}
+                                  ml="4"
+                                  size={heightPixel(6)}
+                                />
+                              }
+                              placeholder={String.Email}
+                              fontSize={fontPixel(16)}
+                              borderRadius={heightPixel(16)}
+                            />
+                            {errors.email && touched.email && (
+                              <View
+                                style={styles({schema}).errorDisplayContainer}>
+                                <Icon
+                                  as={<MaterialIcons name={'error'} />}
+                                  size="3"
+                                  mr={1}
+                                  mt={1}
+                                  ml={2}
+                                  color="#FF0000"
+                                />
+                                <Text style={styles({schema}).errorText}>
+                                  {errors.email}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                          <View>
+                            <Input
+                              name="password"
+                              width="90%"
+                              py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                              color={theme.colors[schema].text}
+                              onChangeText={handleChange('password')}
+                              onBlur={handleBlur('password')}
+                              value={values.password}
+                              autoCapitalize="none"
+                              InputLeftElement={
+                                <Icon
+                                  as={<Image source={Images.Password} />}
+                                  ml="4"
+                                  size={heightPixel(6)}
+                                />
+                              }
+                              placeholder={String.Password}
+                              fontSize={fontPixel(16)}
+                              borderRadius={heightPixel(16)}
+                            />
+                            {errors.password && touched.password && (
+                              <View
+                                style={styles({schema}).errorDisplayContainer}>
+                                <Icon
+                                  as={<MaterialIcons name={'error'} />}
+                                  size="3"
+                                  mr={1}
+                                  mt={1}
+                                  ml={2}
+                                  color="#FF0000"
+                                />
+                                <Text style={styles({schema}).errorText}>
+                                  {errors.password}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
                         </Stack>
                         <Stack
                           space={heightPixel(2)}
@@ -257,6 +267,7 @@ const SignUpScreen = ({navigation}) => {
                             size="sm"
                             defaultIsChecked
                             name="rememberPassword"
+                            colorScheme="green"
                             checked={values.rememberPassword}
                             onPress={() =>
                               setFieldValue(
@@ -275,6 +286,7 @@ const SignUpScreen = ({navigation}) => {
                             size="sm"
                             defaultIsChecked
                             name="email_notification"
+                            colorScheme="green"
                             checked={values.email_notification}
                             onPress={() =>
                               setFieldValue(

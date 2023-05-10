@@ -26,10 +26,11 @@ const LogoComponent = () => {
       </View>
       <View style={styles({schema}).textPart}>
         <CustomText
-          COLOR={theme.colors[schema].text}
+          // COLOR={theme.colors[schema].text}
           SIZE={fontPixel(35)}
           TEXT={String.App_Title_1}
           FAMILY={theme.fonts.Viga_Regular}
+          COLOR={'#53E88B'}
         />
         <CustomText
           COLOR={theme.colors[schema].text}

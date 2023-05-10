@@ -50,6 +50,20 @@ const orderList = [
     desc: 'Waroenk kita',
     price: '$ 35',
   },
+  {
+    id: 5,
+    img: Images.menu_2,
+    name: 'Spacy fresh crab',
+    desc: 'Waroenk kita',
+    price: '$ 35',
+  },
+  {
+    id: 6,
+    img: Images.menu_2,
+    name: 'Spacy fresh crab',
+    desc: 'Waroenk kita',
+    price: '$ 35',
+  },
 ];
 
 const ProfileScreen = ({navigation}) => {
@@ -94,14 +108,17 @@ const ProfileScreen = ({navigation}) => {
         index={0}
         snapPoints={snapPoints}
         onChange={handleSheetChange}
-        backgroundStyle={{borderRadius: 28}}>
-        <UserData />
+        backgroundStyle={{
+          borderRadius: 28,
+          backgroundColor: schema == 'dark' ? 'black' : 'white',
+        }}>
+        <UserData navigation={navigation} />
       </BottomSheet>
     </View>
   );
 };
 
-const UserData = () => {
+const UserData = ({navigation}) => {
   const schema = useColorScheme();
   return (
     <ScrollView
@@ -113,6 +130,7 @@ const UserData = () => {
           <CustomText
             TEXT={String.Member_Gold}
             FAMILY={theme.fonts.BentonSans_Medium}
+            SIZE={fontPixel(12)}
           />
         </View>
         <View style={styles({schema}).userNameContainer}>
@@ -134,7 +152,10 @@ const UserData = () => {
             style={styles({schema}).edit_pencile_icon}
           />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(Screens.VoucherScreen);
+          }}>
           <View style={styles({schema}).voucherContainer}>
             <Image
               source={Images.Voucher_Icon}
@@ -157,7 +178,7 @@ const UserData = () => {
           />
           {orderList.map(element => {
             return (
-              <View style={styles({schema}).orderContainer}>
+              <View style={styles({schema}).orderContainer} key={element.id}>
                 <View>
                   <Image
                     source={element.img}
@@ -173,7 +194,7 @@ const UserData = () => {
                       LINE_HEIGHT={heightPixel(20)}
                       CUSTOM_STYLE={{flexWrap: 'wrap'}}
                     />
-                    <CustomText TEXT={element.desc} />
+                    <CustomText TEXT={element.desc} SIZE={heightPixel(14)} />
                     <CustomText
                       TEXT={element.price}
                       FAMILY={theme.fonts.BentonSans_Bold}

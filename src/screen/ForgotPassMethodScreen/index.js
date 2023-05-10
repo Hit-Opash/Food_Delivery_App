@@ -49,13 +49,22 @@ const ForgotPassMethodScreen = ({navigation}) => {
             FAMILY={theme.fonts.BentonSans_Bold}
             CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
           />
-          <CustomText
-            SIZE={fontPixel(14)} //14
-            LINE_HEIGHT={heightPixel(18)} //20
-            TEXT={String.Forgot_Discreption}
-            FAMILY={theme.fonts.BentonSans_Book}
-            CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
-          />
+          <View>
+            <CustomText
+              SIZE={fontPixel(14)} //14
+              LINE_HEIGHT={heightPixel(18)} //20
+              TEXT={String.Forgot_D1}
+              FAMILY={theme.fonts.BentonSans_Book}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
+            />
+            <CustomText
+              SIZE={fontPixel(14)} //14
+              LINE_HEIGHT={heightPixel(18)} //20
+              TEXT={String.Forgot_D2}
+              FAMILY={theme.fonts.BentonSans_Book}
+              CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
+            />
+          </View>
 
           <TouchableOpacity onPress={() => setMethod('sms')}>
             <View
@@ -63,7 +72,9 @@ const ForgotPassMethodScreen = ({navigation}) => {
                 styles({schema}).method_Container,
                 {
                   backgroundColor:
-                    verifyMethod == 'sms' ? 'lightblue' : 'white',
+                    verifyMethod == 'sms'
+                      ? 'lightblue'
+                      : theme.colors[schema].cardColor,
                 },
               ]}>
               <Image source={Images.Message_2} style={styles({schema}).image} />
@@ -75,18 +86,26 @@ const ForgotPassMethodScreen = ({navigation}) => {
                   CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
                 />
                 <View style={styles({schema}).data}>
-                  <Image
-                    source={Images.Dot}
-                    style={{
-                      tintColor: theme.colors[schema].text,
-                      height: heightPixel(10),
-                      resizeMode: 'contain',
-                    }}
-                  />
-                  <Image
-                    source={Images.Dot}
-                    style={{tintColor: theme.colors[schema].text}}
-                  />
+                  <View style={{flexDirection: 'row', gap: heightPixel(8)}}>
+                    <Image
+                      source={Images.Dot}
+                      style={{
+                        tintColor: theme.colors[schema].text,
+                        height: heightPixel(10),
+                        width: widthPixel(30),
+                        resizeMode: 'contain',
+                      }}
+                    />
+                    <Image
+                      source={Images.Dot}
+                      style={{
+                        tintColor: theme.colors[schema].text,
+                        height: heightPixel(10),
+                        width: widthPixel(30),
+                        resizeMode: 'contain',
+                      }}
+                    />
+                  </View>
                   <CustomText
                     SIZE={fontPixel(16)} //16
                     TEXT={mobile_No}
@@ -103,7 +122,9 @@ const ForgotPassMethodScreen = ({navigation}) => {
                 styles({schema}).method_Container,
                 {
                   backgroundColor:
-                    verifyMethod == 'email' ? 'lightblue' : 'white',
+                    verifyMethod == 'email'
+                      ? 'lightblue'
+                      : theme.colors[schema].cardColor,
                 },
               ]}>
               <Image source={Images.Email} style={styles({schema}).image} />
@@ -120,6 +141,7 @@ const ForgotPassMethodScreen = ({navigation}) => {
                     style={{
                       tintColor: theme.colors[schema].text,
                       height: heightPixel(10),
+                      width: widthPixel(30),
                       resizeMode: 'contain',
                     }}
                   />

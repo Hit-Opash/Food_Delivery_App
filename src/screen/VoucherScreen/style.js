@@ -10,14 +10,15 @@ export const styles = ({schema}) =>
   StyleSheet.create({
     bg_img: {
       width: wp('100%'),
-      height: hp('30%'),
-      position: 'absolute',
+      height: heightPixel(200),
       opacity: 0.2,
+      position: 'absolute',
     },
     rootContainer: {
       alignSelf: 'center',
       gap: heightPixel(20),
       marginBottom: 20,
+      margin: wp('5%'),
     },
     adsImg: {
       borderRadius: heightPixel(16),
@@ -30,7 +31,6 @@ export const styles = ({schema}) =>
       alignSelf: 'flex-end',
       gap: heightPixel(10),
       paddingVertical: heightPixel(20),
-      paddingRight: heightPixel(15),
     },
     orderButtom: {
       alignSelf: 'flex-start',

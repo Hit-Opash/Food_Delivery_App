@@ -8,6 +8,7 @@ import {
   FlatList,
   Text,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native';
@@ -23,6 +24,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {inputSize} from '../../theme/sizes';
 
 const Type = ['Restaurant', 'Menu'];
 const Location = ['1 Km', '>10 Km', '<10 Km'];
@@ -140,6 +142,7 @@ const DisplayTopic = ({topic, schema}) => {
             <CustomText
               TEXT={element}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
+              SIZE={fontPixel(14)}
             />
           </TouchableOpacity>
         );
@@ -158,7 +161,7 @@ const SearchBar = ({schema}) => {
       <Input
         placeholder={String.Search_Hint}
         width="100%"
-        py={4}
+        py={Platform.OS == 'ios' ? 4 : inputSize.size}
         borderRadius={16}
         fontSize={14}
         alignSelf="flex-start"

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  Platform,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 import {styles} from './style';
@@ -17,6 +18,9 @@ import {String} from '../../common/strings';
 import {Icon, Input} from 'native-base';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {fontPixel, heightPixel} from '../../scale/scaling';
+import {Screens} from '../../common/screen';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {inputSize} from '../../theme/sizes';
 
 const ChattingScreen = ({navigation, route}) => {
   const schema = useColorScheme();
@@ -70,10 +74,20 @@ const ChattingScreen = ({navigation, route}) => {
                   <CustomText
                     TEXT={name}
                     FAMILY={theme.fonts.BentonSans_Medium}
+                    SIZE={heightPixel(15)}
                   />
-                  <CustomText TEXT={status} />
+                  <CustomText TEXT={status} SIZE={heightPixel(14)} />
                 </View>
-                <Image source={Images.Call} />
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate(Screens.CallScreen, {
+                      name: 'Hit Doshi',
+                      number: '9664700000',
+                      img: Images.Profile_Img,
+                    });
+                  }}>
+                  <Image source={Images.Call} />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -96,6 +110,7 @@ const ChattingScreen = ({navigation, route}) => {
           <View style={styles({schema}).chatBox}>
             <Input
               backgroundColor={'white'}
+              py={Platform.OS == 'ios' ? 4 : inputSize}
               borderRadius={heightPixel(12)}
               multiline={true}
               value={text}
@@ -144,7 +159,7 @@ const ChatText = ({
         alignItems: 'flex-start',
         marginVertical: heightPixel(5),
       }}>
-      <CustomText TEXT={msg} COLOR={textColor} />
+      <CustomText TEXT={msg} COLOR={textColor} SIZE={heightPixel(14)} />
     </View>
   );
 };

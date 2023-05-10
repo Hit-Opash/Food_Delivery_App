@@ -10,52 +10,46 @@ export const styles = ({schema}) =>
   StyleSheet.create({
     bg_img: {
       width: wp('100%'),
-      height: hp('30%'),
-      position: 'absolute',
+      height: heightPixel(200),
       opacity: 0.2,
+      position: 'absolute',
     },
     rootContainer: {
       flex: 1,
-      gap: heightPixel(20),
-      marginBottom: heightPixel(100),
+      marginBottom: 20,
       marginHorizontal: wp('5%'),
     },
-    orderContainer: {
-      width: wp('90%'),
-      flexDirection: 'row',
-      backgroundColor: theme.colors[schema].cardColor,
-      borderRadius: heightPixel(16),
-      borderColor: 'black',
-      paddingVertical: heightPixel(20),
-      paddingHorizontal: widthPixel(12),
-      gap: widthPixel(14),
-    },
-    orderImg: {
-      width: wp('15%'),
+    img: {
+      width: heightPixel(40),
       height: undefined,
       aspectRatio: 1,
       resizeMode: 'contain',
     },
-    textPart: {
-      flex: 1,
+    title: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    details: {
-      width: wp('40%'),
-      gap: 4,
-      alignItems: 'flex-start',
-    },
-    imgContainer: {
+    dataContainer: {
       flexDirection: 'row',
-      gap: widthPixel(10),
-      alignItems: 'center',
+      gap: widthPixel(14),
     },
-    fun_Img: {
-      width: widthPixel(24),
-      height: undefined,
-      aspectRatio: 1,
+    container: {
+      gap: heightPixel(14),
+      padding: heightPixel(20),
+      borderRadius: heightPixel(22),
+      // borderWidth: 1,
+      // borderColor: 'black',
+      backgroundColor: theme.colors[schema].cardColor,
+    },
+    img2: {
+      width: heightPixel(80),
+      height: heightPixel(40),
       resizeMode: 'contain',
+    },
+    dataContainer2: {
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     priceBox: {
       position: 'absolute',

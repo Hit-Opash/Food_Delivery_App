@@ -23,7 +23,7 @@ import CustomText from '../../component/CustomText';
 import {useColorScheme} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {Log} from '../../common/displayLog';
-import {heightPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 
 const SetLocationScreen = ({navigation}) => {
   const schema = useColorScheme();
@@ -63,7 +63,7 @@ const SetLocationScreen = ({navigation}) => {
 
   function getAddressFromCoordinates({latitude, longitude}) {
     return new Promise(resolve => {
-      const url = `https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?apiKey=${HERE_API_KEY}&mode=retrieveAddresses&prox=${latitude},${longitude}`;
+      const url = ``;
       fetch(url)
         .then(res => res.json())
         .then(resJson => {
@@ -140,8 +140,8 @@ const SetLocationScreen = ({navigation}) => {
           </TouchableOpacity>
           <View>
             <CustomText
-              SIZE={theme.size[7]} //25
-              LINE_HEIGHT={theme.size[9]} //32
+              SIZE={fontPixel(24)}
+              LINE_HEIGHT={heightPixel(32)}
               TEXT={String.Set_Your_Location}
               FAMILY={theme.fonts.BentonSans_Bold}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
@@ -149,15 +149,15 @@ const SetLocationScreen = ({navigation}) => {
           </View>
           <View>
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
@@ -168,8 +168,8 @@ const SetLocationScreen = ({navigation}) => {
               <Image source={Images.Map_Pin_Img} style={styles({schema}).img} />
               <CustomText
                 TEXT={String.Your_Location}
-                SIZE={theme.size[4]}
-                LINE_HEIGHT={theme.size[5]}
+                SIZE={fontPixel(15)}
+                LINE_HEIGHT={heightPixel(20)}
                 FAMILY={theme.fonts.BentonSans_Medium}
               />
             </View>
@@ -178,25 +178,25 @@ const SetLocationScreen = ({navigation}) => {
               onPress={() => requestLocationPermission()}>
               <CustomText
                 TEXT={String.Set_Location}
-                SIZE={theme.size[3]}
-                LINE_HEIGHT={theme.size[4]}
+                SIZE={fontPixel(14)}
+                LINE_HEIGHT={heightPixel(16)}
               />
             </TouchableOpacity>
             <View style={{flexDirection: 'row', alignSelf: 'center'}}>
               <CustomText
                 TEXT={currentLatitude}
-                SIZE={theme.size[3]}
-                LINE_HEIGHT={theme.size[4]}
+                SIZE={fontPixel(14)}
+                LINE_HEIGHT={heightPixel(16)}
               />
               <CustomText
                 TEXT={'  ,  '}
-                SIZE={theme.size[3]}
-                LINE_HEIGHT={theme.size[4]}
+                SIZE={fontPixel(14)}
+                LINE_HEIGHT={heightPixel(16)}
               />
               <CustomText
                 TEXT={currentLongitude}
-                SIZE={theme.size[3]}
-                LINE_HEIGHT={theme.size[4]}
+                SIZE={fontPixel(14)}
+                LINE_HEIGHT={heightPixel(16)}
               />
             </View>
           </View>
@@ -207,7 +207,7 @@ const SetLocationScreen = ({navigation}) => {
                 navigation.popToTop();
                 navigation.navigate(Screens.SuccessScreen, {
                   msg: String.Profile_Success_Msg,
-                  renderScreen: Screens.HomeScreen,
+                  renderScreen: Screens.BottomTab,
                 });
               }}
             />

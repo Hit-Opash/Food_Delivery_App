@@ -15,7 +15,7 @@ export const styles = ({schema}) =>
     },
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
     },
@@ -23,15 +23,16 @@ export const styles = ({schema}) =>
       flexDirection: 'row',
       width: wp('90%'),
       padding: widthPixel(10),
-      backgroundColor: 'white',
+      backgroundColor: theme.colors[schema].cardColor,
       gap: widthPixel(10),
       marginVertical: heightPixel(5),
       borderRadius: heightPixel(16),
       alignItems: 'center',
     },
     dpImg: {
-      flex: 0.3,
+      width: wp('15%'),
+      height: undefined,
+      aspectRatio: 1, //Important
       resizeMode: 'contain',
-      aspectRatio: 1, //important
     },
   });

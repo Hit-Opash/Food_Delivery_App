@@ -26,4 +26,7 @@ export const Screens = {
   NotificationScreen: 'NotificationScreen',
   CallScreen: 'CallScreen',
   OrderDetailsScreen: 'OrderDetailsScreen',
+  ConfirmOrderScreen: 'ConfirmOrderScreen',
+  SetMapLocationScreen: 'SetMapLocationScreen',
+  TrackOrderScreen: 'TrackOrderScreen',
 };

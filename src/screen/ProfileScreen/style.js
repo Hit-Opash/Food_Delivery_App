@@ -42,11 +42,12 @@ export const styles = ({schema}) =>
     voucherContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: widthPixel(16),
+      gap: widthPixel(8),
       borderRadius: heightPixel(22),
       borderColor: 'black',
       borderWidth: 1,
       padding: heightPixel(12),
+      backgroundColor: theme.colors[schema].cardColor,
     },
     voucherIcon: {
       width: heightPixel(45),
@@ -55,13 +56,13 @@ export const styles = ({schema}) =>
       resizeMode: 'contain',
     },
     favouriteContainer: {
-      alignSelf: 'flex-start',
       gap: heightPixel(20),
+      alignItems: 'flex-start',
     },
     orderContainer: {
       width: wp('90%'),
       flexDirection: 'row',
-      backgroundColor: 'silver',
+      backgroundColor: theme.colors[schema].cardColor,
       borderRadius: heightPixel(16),
       borderColor: 'black',
       paddingVertical: heightPixel(20),

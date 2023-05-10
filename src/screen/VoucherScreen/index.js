@@ -27,11 +27,15 @@ const VoucherScreen = ({navigation}) => {
       id: 1,
       img: Images.voucher_2,
       month: 'October',
+      textColor: 'white',
+      buttonColor: 'green',
     },
     {
       id: 2,
       img: Images.voucher_3,
       month: 'October',
+      color: 'gray',
+      buttonColor: 'gray',
     },
   ];
   return (
@@ -74,18 +78,21 @@ const VoucherScreen = ({navigation}) => {
                       <View style={styles({schema}).textPart}>
                         <CustomText
                           TEXT={String.Special_Deal_For}
-                          SIZE={20}
+                          SIZE={fontPixel(20)}
                           CUSTOM_STYLE={{alignSelf: 'flex-start'}}
+                          COLOR={element.color}
                         />
                         <CustomText
                           TEXT={element.month}
-                          SIZE={20}
+                          SIZE={fontPixel(20)}
                           CUSTOM_STYLE={{alignSelf: 'flex-start'}}
+                          COLOR={element.color}
                         />
                         <TouchableOpacity style={styles({schema}).orderButtom}>
                           <CustomText
                             TEXT={String.Order_Now}
                             SIZE={heightPixel(14)}
+                            COLOR={element.buttonColor}
                           />
                         </TouchableOpacity>
                       </View>

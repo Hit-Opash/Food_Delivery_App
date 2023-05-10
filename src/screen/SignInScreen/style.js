@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {heightPixel, widthPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel, widthPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -50,10 +50,13 @@ export const styles = ({schema}) =>
       aspectRatio: 1,
       resizeMode: 'contain',
     },
-    shadow: {},
+    shadow: {
+      elevation: 1,
+      shadowColor: '#52006A',
+    },
     errorText: {
       color: '#FF0000',
-      fontSize: 11,
+      fontSize: fontPixel(14),
     },
     errorDisplayContainer: {
       flexDirection: 'row',

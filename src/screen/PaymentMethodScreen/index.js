@@ -18,7 +18,7 @@ import {Input, Icon, Stack} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
-import {heightPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 
 const PaymentMethodScreen = ({navigation}) => {
   const [selected, setSelect] = useState(null);
@@ -47,8 +47,8 @@ const PaymentMethodScreen = ({navigation}) => {
           </TouchableOpacity>
           <View>
             <CustomText
-              SIZE={theme.size[7]} //25
-              LINE_HEIGHT={theme.size[9]} //32
+              SIZE={fontPixel(24)}
+              LINE_HEIGHT={heightPixel(32)}
               TEXT={String.Payment_Method}
               FAMILY={theme.fonts.BentonSans_Bold}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
@@ -56,21 +56,21 @@ const PaymentMethodScreen = ({navigation}) => {
           </View>
           <View>
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
           </View>
-          <Stack space={4} w="100%" alignItems="center">
+          <Stack space={heightPixel(4)} w="100%" alignItems="center">
             {paymentMethod.map(function (element, id) {
               return (
                 <TouchableOpacity

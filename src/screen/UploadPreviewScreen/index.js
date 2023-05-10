@@ -18,7 +18,7 @@ import {Input, Icon, Stack} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
-import {heightPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 
 const UploadPreviewScreen = ({navigation}) => {
   const [show, setShow] = React.useState(false);
@@ -47,15 +47,15 @@ const UploadPreviewScreen = ({navigation}) => {
           </TouchableOpacity>
           <View>
             <CustomText
-              SIZE={theme.size[7]} //25
-              LINE_HEIGHT={theme.size[9]} //32
+              SIZE={fontPixel(24)}
+              LINE_HEIGHT={heightPixel(32)}
               TEXT={String.UploadPhoto_Screen_T1}
               FAMILY={theme.fonts.BentonSans_Bold}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
-              SIZE={theme.size[7]} //25
-              LINE_HEIGHT={theme.size[9]} //32
+              SIZE={fontPixel(24)}
+              LINE_HEIGHT={heightPixel(32)}
               TEXT={String.UploadPhoto_Screen_T2}
               FAMILY={theme.fonts.BentonSans_Bold}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
@@ -63,15 +63,15 @@ const UploadPreviewScreen = ({navigation}) => {
           </View>
           <View>
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D1}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}
             />
             <CustomText
-              SIZE={theme.size[3]} //14
-              LINE_HEIGHT={theme.size[6]} //22
+              SIZE={fontPixel(14)}
+              LINE_HEIGHT={heightPixel(22)}
               TEXT={String.Security_D2}
               FAMILY={theme.fonts.BentonSans_Book}
               CUSTOM_STYLE={{alignSelf: 'flex-start', textAlign: 'left'}}

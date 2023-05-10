@@ -10,7 +10,7 @@ export const styles = ({schema}) =>
     uploadPhotoPreview_container: {
       flex: 1,
       margin: wp('5%'),
-      gap: 20,
+      gap: heightPixel(20),
       marginBottom: wp('4%'),
     },
     bg_img: {
@@ -25,13 +25,13 @@ export const styles = ({schema}) =>
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      borderRadius: theme.size[6],
+      borderRadius: heightPixel(22),
     },
     phofileImg: {
       width: '100%',
       height: '100%',
       resizeMode: 'stretch',
-      borderRadius: theme.size[6],
+      borderRadius: heightPixel(22),
     },
     closeIcon: {
       position: 'absolute',

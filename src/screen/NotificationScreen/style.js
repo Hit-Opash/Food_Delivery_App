@@ -28,7 +28,7 @@ export const styles = ({schema}) =>
     },
     msgContainer: {
       flexDirection: 'row',
-      backgroundColor: 'white',
+      backgroundColor: theme.colors[schema].cardColor,
       borderRadius: heightPixel(16),
       padding: 24,
     },
@@ -36,5 +36,5 @@ export const styles = ({schema}) =>
       justifyContent: 'center',
       gap: 5,
       marginLeft: 10,
-    }
+    },
   });

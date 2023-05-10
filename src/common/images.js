@@ -2,6 +2,7 @@ export const Images = {
   Logo: require('../../assets/images/Logo/Logo.png'),
   BackGroung1: require('../../assets/images/BackGround/BgPattern_1.png'),
   BackGroung2: require('../../assets/images/BackGround/BgPattern-2.png'),
+  BackGroung3: require('../../assets/images/BackGround/BgPattern_2.png'),
   Feature1: require('../../assets/images/FeatureScreen/Feature_1.png'),
   Feature2: require('../../assets/images/FeatureScreen/Feature_2.png'),
   FaceBookIcon: require('../../assets/images/SignInScreen/facebook_icon.png'),
@@ -61,4 +62,11 @@ export const Images = {
 
   Edit_Pencil_Icon: require('../../assets/images/ProfileScreen/Edit_Icon.png'),
   Voucher_Icon: require('../../assets/images/ProfileScreen/Voucher_Icon.png'),
+
+  Track_Marker: require('../../assets/images/TrakOrderScreen/Track_Marker.png'),
+  Call_Icon: require('../../assets/images/TrakOrderScreen/Call_Icon.png'),
+  Clock_Icon: require('../../assets/images/TrakOrderScreen/Clock_Icon.png'),
+  Delivery_Men_Photo: require('../../assets/images/TrakOrderScreen/Delivery_Men_Photo.png'),
+  Message_Icon: require('../../assets/images/TrakOrderScreen/Message_Icon.png'),
+  Direction_Icon: require('../../assets/images/TrakOrderScreen/Direction_Icon.png'),
 };

@@ -10,6 +10,7 @@ import {
 } from 'react-native-responsive-dimensions';
 
 import {theme} from '../../theme';
+import {fontPixel} from '../../scale/scaling';
 export const styles = ({schema}) =>
   StyleSheet.create({
     container: {
@@ -25,9 +26,7 @@ export const styles = ({schema}) =>
       position: 'absolute',
       width: '100%',
       height: hp('30%'),
-      resizeMode: 'cover',
-      alignItems: 'center',
-      justifyContent: 'center',
+      resizeMode: 'stretch',
     },
     secondPartContainer: {
       height: hp('70%'),
@@ -46,7 +45,7 @@ export const styles = ({schema}) =>
     input: {},
     errorText: {
       color: '#FF0000',
-      fontSize: 11,
+      fontSize: fontPixel(12),
     },
     errorDisplayContainer: {
       flexDirection: 'row',

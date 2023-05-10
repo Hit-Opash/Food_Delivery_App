@@ -1,21 +1,23 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {heightPixel, widthPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
-export const styles = ({schema}) =>
+
+export const styles = ({scheme}) =>
   StyleSheet.create({
     bg_img: {
       width: wp('100%'),
-      height: hp('35%'),
+      height: heightPixel(200),
       opacity: 0.2,
       position: 'absolute',
     },
     rootContainer: {
       gap: heightPixel(20),
       margin: wp('5%'),
+      paddingBottom: heightPixel(100),
     },
     topContainer: {
       flexDirection: 'row',
@@ -27,7 +29,7 @@ export const styles = ({schema}) =>
     notificationIconContainer: {
       alignSelf: 'center',
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
       height: heightPixel(45),
       width: heightPixel(45),
       justifyContent: 'center',
@@ -40,6 +42,7 @@ export const styles = ({schema}) =>
     searchBarContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
     },
     filterIconContainer: {
       height: heightPixel(55),
@@ -58,14 +61,14 @@ export const styles = ({schema}) =>
     },
     box: {
       width: wp('40%'),
-      height: heightPixel(200),
-      backgroundColor: 'white',
       borderRadius: heightPixel(20),
       alignItems: 'center',
       padding: heightPixel(20),
       justifyContent: 'space-evenly',
       margin: heightPixel(5),
       marginTop: heightPixel(20),
+      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
+      // backgroundColor: theme.colors[scheme].cardColor,
     },
     boxText: {
       alignItems: 'center',
@@ -82,19 +85,19 @@ export const styles = ({schema}) =>
     },
     menuBox: {
       width: wp('85%'),
-      backgroundColor: 'white',
       padding: widthPixel(10),
       flexDirection: 'row',
       alignItems: 'center',
       margin: heightPixel(5),
       borderRadius: heightPixel(20),
-      alignSelf: 'center',
       justifyContent: 'space-between',
+      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
+      // backgroundColor: theme.colors[scheme].text,
+      // backgroundColor: theme.colors[scheme].cardColor,
     },
     boxText2: {
       gap: heightPixel(5),
       alignItems: 'flex-start',
-      justifyContent: 'space-between',
     },
     image2: {
       width: heightPixel(65),
