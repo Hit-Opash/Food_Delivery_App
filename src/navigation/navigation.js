@@ -46,6 +46,11 @@ import OrderDetailsScreen from '../screen/OrderDetailsScreen';
 import ConfirmOrderScreen from '../screen/ConfirmOrderScreen';
 import SetMapLocationScreen from '../screen/SetMapLocationScreen';
 import TrackOrderScreen from '../screen/TrackOrderScreen';
+import DetailsRestaurantScreen from '../screen/DetailsRestaurantScreen';
+import DetailsMenuScreen from '../screen/DetailsMenuScreen';
+import EditProfileScreen from '../screen/EditProfileScreen';
+import EditPhotoScreen from '../screen/EditPhotoScreen';
+import EditPaymentDetailsScreen from '../screen/EditPaymentDetailsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -107,6 +112,17 @@ const Navigation = () => {
         component={SetMapLocationScreen}
       />
       <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
+      <Stack.Screen
+        name="DetailsRestaurantScreen"
+        component={DetailsRestaurantScreen}
+      />
+      <Stack.Screen name="DetailsMenuScreen" component={DetailsMenuScreen} />
+      <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+      <Stack.Screen name="EditPhotoScreen" component={EditPhotoScreen} />
+      <Stack.Screen
+        name="EditPaymentDetailsScreen"
+        component={EditPaymentDetailsScreen}
+      />
     </Stack.Navigator>
   );
 };
@@ -212,6 +228,7 @@ export function CustomTab() {
             options={{
               tabBarShowLabel: false,
               tabBarButton: props => <TabButton {...props} item={item} />,
+              tabBarBadge: 3,
             }}
           />
         );

@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {heightPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 import {theme} from '../../theme';
 export const styles = ({schema}) =>
   StyleSheet.create({
@@ -22,5 +22,15 @@ export const styles = ({schema}) =>
     button: {
       flex: 1,
       justifyContent: 'flex-end',
+    },
+    errorText: {
+      color: '#FF0000',
+      fontSize: fontPixel(12),
+    },
+    errorDisplayContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'flex-start',
+      marginTop: heightPixel(1),
     },
   });

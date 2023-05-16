@@ -98,7 +98,7 @@ export const styles = ({schema}) =>
       resizeMode: 'contain',
     },
     buyAgainButtom: {
-      backgroundColor: 'lightgreen',
+      backgroundColor: '#15BE77',
       borderRadius: heightPixel(16),
       padding: heightPixel(14),
       alignSelf: 'center',

@@ -1,10 +1,18 @@
-import {Icon, Input, Stack, useBreakpointValue, WarningIcon} from 'native-base';
+import {
+  Icon,
+  Input,
+  Stack,
+  useBreakpointValue,
+  useToast,
+  WarningIcon,
+} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
   Keyboard,
   Platform,
+  Pressable,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -25,9 +33,16 @@ import * as yup from 'yup';
 import {Formik} from 'formik';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {inputSize} from '../../theme/sizes';
+import {Key} from '../../common/storagekey';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from '../../component/Toast';
 
 const SignInScreen = ({navigation}) => {
   const schema = useColorScheme();
+  const toast = useToast();
+  const [show, setShow] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [pass, setPass] = useState(null);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   console.log(schema);
 
@@ -39,21 +54,32 @@ const SignInScreen = ({navigation}) => {
     xl: 65,
   });
 
+  useEffect(() => {
+    async function getData() {
+      const e = await AsyncStorage.getItem(Key.Email);
+      const p = await AsyncStorage.getItem(Key.Password);
+
+      setEmail(e);
+      setPass(p);
+    }
+    getData();
+  }, [email, pass]);
+
   const login_ValidationSchema = yup.object().shape({
-    email: yup
+    Email: yup
       .string()
-      .email('Please enter valid email')
+      // .email('Please enter valid email')
       .required('Email Address is Required'),
-    password: yup
+    Password: yup
       .string()
-      .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
-      .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
-      .matches(/\d/, 'Password must have a number')
-      .matches(
-        /[!@#$%^&*()\-_"=+{}; :,<.>]/,
-        'Password must have a special character',
-      )
-      .min(8, ({min}) => `Password must be at least ${min} characters`)
+      // .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+      // .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+      // .matches(/\d/, 'Password must have a number')
+      // .matches(
+      //   /[!@#$%^&*()\-_"=+{}; :,<.>]/,
+      //   'Password must have a special character',
+      // )
+      // .min(8, ({min}) => `Password must be at least ${min} characters`)
       .required('Password is required'),
   });
 
@@ -88,6 +114,8 @@ const SignInScreen = ({navigation}) => {
           resetScrollToCoords={{x: 0, y: 0}}
           contentContainerStyle={{flexGrow: 1}}
           bounces={false}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
           scrollEnabled={isKeyboardVisible}>
           <View style={styles({schema}).container_1}>
             <LogoComponent />
@@ -99,18 +127,35 @@ const SignInScreen = ({navigation}) => {
               FAMILY={theme.fonts.BentonSans_Bold}
             />
             <Formik
-              validationSchema={login_ValidationSchema}
+              // validationSchema={login_ValidationSchema}
               initialValues={{
-                email: '',
-                password: '',
+                Email: email,
+                Password: pass,
               }}
               onSubmit={async values => {
                 console.log(values);
-                const jsonValue = JSON.stringify(values);
+                // const jsonValue = JSON.stringify(values);
                 // await AsyncStorage.setItem(Key.Account_Details, jsonValue);
                 // await AsyncStorage.setItem(Key.IsLogin, 'true');
                 // Log({msg: `Account Details: ${jsonValue}`});
-                navigation.navigate(Screens.UserBioDataScreen);
+                const rightEmail = await AsyncStorage.getItem(Key.Email);
+                const rightPass = await AsyncStorage.getItem(Key.Password);
+
+                console.log('Right Details: -', rightEmail + ' ' + rightPass);
+                console.log(rightPass + ' ' + values[Key.Password]);
+                if (
+                  rightEmail == values[Key.Email] &&
+                  rightPass == values[Key.Password]
+                ) {
+                  navigation.navigate(Screens.BottomTab);
+                  await AsyncStorage.setItem(Key.IsLogin, JSON.stringify(true));
+                } else {
+                  // <Toast title={'Enter Valid Details'} />;
+                  toast.show({
+                    title: 'Enter Valid Login Details',
+                    duration: 1500,
+                  });
+                }
               }}>
               {({
                 handleChange,
@@ -132,11 +177,12 @@ const SignInScreen = ({navigation}) => {
                             // height={heightOfInput}
                             // size={heightOfInput}
                             py={Platform.OS == 'ios' ? 4 : inputSize.size}
-                            name="email"
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
+                            name="Email"
+                            onChangeText={handleChange('Email')}
+                            onBlur={handleBlur('Email')}
+                            value={values.Email}
                             color={theme.colors[schema].text}
+                            focusOutlineColor={'green.500'}
                             autoCapitalize="none"
                             pl={4}
                             padding={heightPixel(3)}
@@ -151,7 +197,7 @@ const SignInScreen = ({navigation}) => {
                             fontSize={fontPixel(16)}
                             borderRadius={heightPixel(16)}
                           />
-                          {errors.email && touched.email && (
+                          {/* {errors.Email && touched.Email && (
                             <View
                               style={styles({schema}).errorDisplayContainer}>
                               <Icon
@@ -162,20 +208,22 @@ const SignInScreen = ({navigation}) => {
                                 color="#FF0000"
                               />
                               <Text style={styles({schema}).errorText}>
-                                {errors.email}
+                                {errors.Email}
                               </Text>
                             </View>
-                          )}
+                          )} */}
                         </View>
 
                         <View>
                           <Input
                             width="90%"
-                            name="password"
+                            name="Password"
+                            type={show ? 'text' : 'password'}
                             py={Platform.OS == 'ios' ? 4 : inputSize.size}
-                            onChangeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
+                            onChangeText={handleChange('Password')}
+                            onBlur={handleBlur('Password')}
+                            focusOutlineColor={'green.500'}
+                            value={values.Password}
                             color={theme.colors[schema].text}
                             autoCapitalize="none"
                             pl={4}
@@ -187,12 +235,29 @@ const SignInScreen = ({navigation}) => {
                             //     size={heightPixel(6)}
                             //   />
                             // }
+                            InputRightElement={
+                              <Pressable onPress={() => setShow(!show)}>
+                                <Icon
+                                  as={
+                                    <MaterialIcons
+                                      name={
+                                        show ? 'visibility' : 'visibility-off'
+                                      }
+                                    />
+                                  }
+                                  size={heightPixel(6)}
+                                  mr="4"
+                                  color={theme.colors.green_gradient}
+                                  opacity={0.7}
+                                />
+                              </Pressable>
+                            }
                             placeholder={String.Password}
                             fontSize={fontPixel(16)}
                             borderRadius={heightPixel(16)}
                           />
 
-                          {errors.password && touched.password && (
+                          {/* {errors.Password && touched.Password && (
                             <View
                               style={styles({schema}).errorDisplayContainer}>
                               <Icon
@@ -203,10 +268,10 @@ const SignInScreen = ({navigation}) => {
                                 color="#FF0000"
                               />
                               <Text style={styles({schema}).errorText}>
-                                {errors.password}
+                                {errors.Password}
                               </Text>
                             </View>
-                          )}
+                          )} */}
                         </View>
                         <CustomText
                           SIZE={fontPixel(12)}
@@ -265,9 +330,10 @@ const SignInScreen = ({navigation}) => {
                       </TouchableOpacity>
                       <CustomButton
                         title={String.Login}
-                        onPress={() => {
-                          navigation.replace(Screens.BottomTab);
-                        }}
+                        onPress={handleSubmit}
+                        // onPress={() => {
+                        //   navigation.replace(Screens.BottomTab);
+                        // }}
                       />
                     </Stack>
                   </View>

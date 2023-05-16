@@ -29,7 +29,7 @@ export const styles = ({scheme}) =>
     notificationIconContainer: {
       alignSelf: 'center',
       alignItems: 'center',
-      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
+      backgroundColor: scheme == 'dark' ? '#1F1B24' : '#E8E8E8',
       height: heightPixel(45),
       width: heightPixel(45),
       justifyContent: 'center',
@@ -67,16 +67,14 @@ export const styles = ({scheme}) =>
       justifyContent: 'space-evenly',
       margin: heightPixel(5),
       marginTop: heightPixel(20),
-      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
+      backgroundColor: scheme == 'dark' ? '#1F1B24' : '#E8E8E8',
       // backgroundColor: theme.colors[scheme].cardColor,
     },
     boxText: {
       alignItems: 'center',
       gap: heightPixel(10),
     },
-    boxImage: {
-      justifyContent: 'center',
-    },
+    boxImage: {},
     image1: {
       width: wp('25%'),
       height: undefined,
@@ -91,7 +89,7 @@ export const styles = ({scheme}) =>
       margin: heightPixel(5),
       borderRadius: heightPixel(20),
       justifyContent: 'space-between',
-      backgroundColor: Platform.OS == 'ios' ? '#1F1B24' : 'white',
+      backgroundColor: scheme == 'dark' ? '#1F1B24' : '#E8E8E8',
       // backgroundColor: theme.colors[scheme].text,
       // backgroundColor: theme.colors[scheme].cardColor,
     },

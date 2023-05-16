@@ -24,7 +24,7 @@ export const styles = ({schema}) =>
       flexDirection: 'row',
       width: wp('90%'),
       padding: wp('3%'),
-      backgroundColor: theme.colors[schema].cardColor,
+      backgroundColor: schema == 'dark' ? '#1F1B24' : '#E8E8E8',
       gap: widthPixel(10),
       borderRadius: heightPixel(16),
       alignItems: 'center',

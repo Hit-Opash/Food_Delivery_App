@@ -18,23 +18,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Screens} from '../../common/screen';
 import CustomText from '../../component/CustomText';
 import {fontPixel} from '../../scale/scaling';
+import FeatureScreen1 from '../FeatureScreen_1';
 
 const SplashScreen = ({navigation}) => {
   const schema = useColorScheme();
   setTimeout(async () => {
-    const IsFirstTime = await AsyncStorage.getItem(Key.IsFirstTime);
+    let IsFirstTime = await AsyncStorage.getItem(Key.IsFirstTime);
+    let IsLogin = await AsyncStorage.getItem(Key.IsLogin);
     Log({msg: `IsFirstTime Launch: ${IsFirstTime}`});
+    IsFirstTime = JSON.parse(IsFirstTime);
+    IsLogin = JSON.parse(IsLogin);
     if (IsFirstTime || IsFirstTime == null) {
       navigation.replace(Screens.FeatureScreen1, {
-        title: String.Order_Completed,
-        desc: 'Please rate your last Driver',
-        img: Images.Restaurant_2,
-        name: 'Hit Doshi',
-        number: '9999999999',
+        // title: String.Order_Completed,
+        // desc: 'Please rate your last Driver',
+        // img: Images.Restaurant_2,
+        // name: 'Hit Doshi',
+        // number: '9999999999',
         // img: Images.Profile_Img,
       });
+    } else if (IsLogin) {
+      navigation.replace(Screens.FeatureScreen1);
     } else {
-      navigation.replace(Screens.SignInScreen);
+      navigation.replace(Screens.FeatureScreen1);
     }
   }, 3000);
   return (

@@ -33,10 +33,12 @@ export const styles = ({schema}) =>
       resizeMode: 'stretch',
       borderRadius: heightPixel(22),
     },
-    closeIcon: {
+    closeIconButton: {
       position: 'absolute',
       top: heightPixel(15),
       right: widthPixel(15),
+    },
+    closeIconImg: {
       width: widthPixel(30),
       height: undefined,
       aspectRatio: 1,

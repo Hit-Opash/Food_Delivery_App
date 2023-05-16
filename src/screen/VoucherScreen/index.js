@@ -88,7 +88,19 @@ const VoucherScreen = ({navigation}) => {
                           CUSTOM_STYLE={{alignSelf: 'flex-start'}}
                           COLOR={element.color}
                         />
-                        <TouchableOpacity style={styles({schema}).orderButtom}>
+                        <TouchableOpacity
+                          style={styles({schema}).orderButtom}
+                          onPress={() => {
+                            navigation.navigate(Screens.DetailsMenuScreen, {
+                              data: {
+                                id: 2,
+                                icon: Images.menu_2,
+                                name: 'Fruit Salad',
+                                desc: 'Wijie Resto',
+                                price: 5,
+                              },
+                            });
+                          }}>
                           <CustomText
                             TEXT={String.Order_Now}
                             SIZE={heightPixel(14)}

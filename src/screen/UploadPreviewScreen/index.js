@@ -8,7 +8,7 @@ import {
   Pressable,
   useColorScheme,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Images} from '../../common/images';
 import {styles} from './style';
 import {String} from '../../common/strings';
@@ -19,11 +19,34 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
 import {fontPixel, heightPixel} from '../../scale/scaling';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Key} from '../../common/storagekey';
 
 const UploadPreviewScreen = ({navigation}) => {
-  const [show, setShow] = React.useState(false);
+  const [path, setPath] = useState(null);
   const [confirmShow, setConfirmShow] = React.useState(false);
   const schema = useColorScheme();
+  var imgPath = '';
+
+  async function getProfileImg() {
+    imgPath = await AsyncStorage.getItem(Key.Profile_Img);
+    const parseData = JSON.parse(imgPath);
+
+    if (parseData) {
+      console.log('Path:- ', parseData.assets[0].uri);
+      setPath(parseData.assets[0].uri);
+    }
+  }
+
+  useEffect(() => {
+    getProfileImg();
+  }, []);
+
+  async function removePath() {
+    await AsyncStorage.removeItem(Key.Profile_Img);
+    // console.log(await AsyncStorage.getItem(Key.Profile_Img));
+    console.log('Remove path successfully');
+  }
   return (
     <>
       <ImageBackground
@@ -79,13 +102,20 @@ const UploadPreviewScreen = ({navigation}) => {
           </View>
           <View style={styles({schema}).profileStyle_Container}>
             <Image
-              source={Images.Profile_Img}
+              source={path ? {uri: path} : Images.Profile_Img}
               style={styles({schema}).phofileImg}
             />
-            <Image
-              source={Images.Close_Icon}
-              style={styles({schema}).closeIcon}
-            />
+            <TouchableOpacity
+              style={styles({schema}).closeIconButton}
+              onPress={() => {
+                removePath();
+                navigation.navigate(Screens.UploadPhotoScreen);
+              }}>
+              <Image
+                source={Images.Close_Icon}
+                style={styles({schema}).closeIconImg}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles({schema}).button}>
             <CustomButton

@@ -169,7 +169,7 @@ const SetMapLocationScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles({schema}).setLocation_Button}
               onPress={() => {
-                navigation.navigate(Screens.TrackOrderScreen);
+                navigation.pop();
               }}>
               <CustomText
                 TEXT={String.Set_Location}

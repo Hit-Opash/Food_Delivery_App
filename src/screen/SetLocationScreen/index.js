@@ -24,10 +24,13 @@ import {useColorScheme} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {Log} from '../../common/displayLog';
 import {fontPixel, heightPixel} from '../../scale/scaling';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Key} from '../../common/storagekey';
+// import Geocoder from 'react-native-geocoder';
 
 const SetLocationScreen = ({navigation}) => {
   const schema = useColorScheme();
-  const [show, setShow] = React.useState(false);
+  const [address, setAddress] = useState('');
   const [currentLongitude, setCurrentLongitude] = useState(null);
   const [currentLatitude, setCurrentLatitude] = useState(null);
   const [locationStatus, setLocationStatus] = useState(null);
@@ -61,32 +64,15 @@ const SetLocationScreen = ({navigation}) => {
     }
   };
 
-  function getAddressFromCoordinates({latitude, longitude}) {
-    return new Promise(resolve => {
-      const url = ``;
-      fetch(url)
-        .then(res => res.json())
-        .then(resJson => {
-          // the response had a deeply nested structure :/
-          if (
-            resJson &&
-            resJson.Response &&
-            resJson.Response.View &&
-            resJson.Response.View[0] &&
-            resJson.Response.View[0].Result &&
-            resJson.Response.View[0].Result[0]
-          ) {
-            resolve(resJson.Response.View[0].Result[0].Location.Address.Label);
-          } else {
-            resolve();
-          }
-        })
-        .catch(e => {
-          console.log('Error in getAddressFromCoordinates', e);
-          resolve();
-        });
-    });
-  }
+  // async function getAddressFromCoordinates({latitude, longitude}) {
+  //   try {
+  //     const res = await Geocoder.geocodePosition({latitude, longitude});
+  //     setAddress(res);
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
   const getOneTimeLocation = () => {
     setLocationStatus('Getting Location ...');
     Geolocation.getCurrentPosition(
@@ -105,6 +91,7 @@ const SetLocationScreen = ({navigation}) => {
 
         //Setting Longitude state
         setCurrentLatitude(currentLatitude);
+        // getAddressFromCoordinates(currentLatitude, currentLongitude);
       },
       error => {
         setLocationStatus(error.message);
@@ -189,7 +176,7 @@ const SetLocationScreen = ({navigation}) => {
                 LINE_HEIGHT={heightPixel(16)}
               />
               <CustomText
-                TEXT={'  ,  '}
+                TEXT={('  ,  ', address)}
                 SIZE={fontPixel(14)}
                 LINE_HEIGHT={heightPixel(16)}
               />
@@ -203,7 +190,11 @@ const SetLocationScreen = ({navigation}) => {
           <View style={styles({schema}).button}>
             <CustomButton
               title={String.Finish}
-              onPress={() => {
+              onPress={async () => {
+                await AsyncStorage.setItem(
+                  Key.IsFirstTime,
+                  JSON.stringify(false),
+                );
                 navigation.popToTop();
                 navigation.navigate(Screens.SuccessScreen, {
                   msg: String.Profile_Success_Msg,

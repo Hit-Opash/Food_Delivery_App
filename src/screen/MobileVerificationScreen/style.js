@@ -34,8 +34,14 @@ export const styles = ({schema}) =>
       borderWidth: 2,
       color: theme.colors[schema].text,
     },
-
     underlineStyleHighLighted: {
       borderColor: theme.colors[schema].text,
     },
+    resendOTP: {
+      color: theme.colors[schema].text,
+      alignSelf: 'center',
+      textDecorationLine: 'underline',
+      color: '#53E88B',
+      fontFamily: theme.fonts.BentonSans_Book,
+    }
   });

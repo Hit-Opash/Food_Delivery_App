@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Images} from '../../common/images';
 import {styles} from './style';
 import {String} from '../../common/strings';
@@ -21,9 +21,26 @@ import {Rating} from 'react-native-ratings';
 import {Icon, Input} from 'native-base';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Key} from '../../common/storagekey';
+import {useFocusEffect} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import { removeAllItem, removeItem } from '../../redux/cartSlice';
 
-const ConfirmOrderScreen = ({navigation}) => {
+const ConfirmOrderScreen = ({navigation, route}) => {
   const schema = useColorScheme();
+  const {sub_total, delivery_charge, discount, total} = route.params;
+  const paymentMethod = [Images.PayPal, Images.Visa, Images.Payonner];
+  const [PayMethod, setPayMethod] = useState(0);
+  useFocusEffect(() => {
+    async function readData() {
+      const method = await AsyncStorage.getItem(Key.PaymentMethod);
+      setPayMethod(method);
+    }
+
+    readData();
+  });
+  const dispatch = useDispatch();
   return (
     <>
       <ImageBackground
@@ -91,7 +108,10 @@ const ConfirmOrderScreen = ({navigation}) => {
             <View style={styles({schema}).container}>
               <View style={styles({schema}).title}>
                 <CustomText TEXT={String.Payment_Method} SIZE={fontPixel(14)} />
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(Screens.EditPaymentDetailsScreen)
+                  }>
                   <CustomText
                     TEXT={String.Edit}
                     COLOR={'#15BE77'}
@@ -100,7 +120,10 @@ const ConfirmOrderScreen = ({navigation}) => {
                 </TouchableOpacity>
               </View>
               <View style={styles({schema}).dataContainer2}>
-                <Image source={Images.PayPal} style={styles({schema}).img2} />
+                <Image
+                  source={paymentMethod[PayMethod]}
+                  style={styles({schema}).img2}
+                />
                 <CustomText
                   TEXT={'2121 6352 8465 ****'}
                   SIZE={fontPixel(15)}
@@ -130,7 +153,7 @@ const ConfirmOrderScreen = ({navigation}) => {
                     SIZE={heightPixel(14)}
                   />
                   <CustomText
-                    TEXT={'120 $'}
+                    TEXT={sub_total + ' $'}
                     FAMILY={theme.fonts.BentonSans_Medium}
                     COLOR={'white'}
                     SIZE={heightPixel(14)}
@@ -145,7 +168,7 @@ const ConfirmOrderScreen = ({navigation}) => {
                     SIZE={heightPixel(14)}
                   />
                   <CustomText
-                    TEXT={'10 $'}
+                    TEXT={delivery_charge + ' $'}
                     FAMILY={theme.fonts.BentonSans_Medium}
                     COLOR={'white'}
                     SIZE={heightPixel(14)}
@@ -159,7 +182,7 @@ const ConfirmOrderScreen = ({navigation}) => {
                     SIZE={heightPixel(14)}
                   />
                   <CustomText
-                    TEXT={'20 $'}
+                    TEXT={discount + ' $'}
                     FAMILY={theme.fonts.BentonSans_Medium}
                     COLOR={'white'}
                     SIZE={heightPixel(14)}
@@ -177,7 +200,7 @@ const ConfirmOrderScreen = ({navigation}) => {
                     SIZE={heightPixel(14)}
                   />
                   <CustomText
-                    TEXT={'150 $'}
+                    TEXT={total + ' $'}
                     FAMILY={theme.fonts.BentonSans_Medium}
                     COLOR={'white'}
                     SIZE={heightPixel(14)}
@@ -185,15 +208,16 @@ const ConfirmOrderScreen = ({navigation}) => {
                 </View>
                 <View style={styles({schema}).orderButton}>
                   <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate(Screens.RattingScreen, {
+                    onPress={() => {
+                      navigation.replace(Screens.TrackOrderScreen, {
                         title: String.Order_Completed,
                         desc: 'Please rate your last Driver',
                         img: Images.Profile_Img,
                         name: 'Hit Doshi',
                         number: '9999999999',
-                      })
-                    }>
+                      });
+                      dispatch(removeAllItem());
+                    }}>
                     <CustomText
                       TEXT={String.Place_My_Order}
                       FAMILY={theme.fonts.BentonSans_Medium}

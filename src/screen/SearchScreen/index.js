@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {SafeAreaView} from 'react-native';
 import {Images} from '../../common/images';
 import CustomText from '../../component/CustomText';
@@ -40,6 +40,8 @@ const Food = [
 
 const SearchScreen = () => {
   const schema = useColorScheme();
+  const [type, setType] = useState('Restaurant');
+  const [location, setLocation] = useState(1);
   return (
     <>
       <ImageBackground
@@ -149,10 +151,6 @@ const DisplayTopic = ({topic, schema}) => {
       })}
     </View>
   );
-};
-
-const TopicItem = ({data, schema}) => {
-  return <CustomText TEXT={data} />;
 };
 
 const SearchBar = ({schema}) => {

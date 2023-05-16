@@ -29,4 +29,9 @@ export const Screens = {
   ConfirmOrderScreen: 'ConfirmOrderScreen',
   SetMapLocationScreen: 'SetMapLocationScreen',
   TrackOrderScreen: 'TrackOrderScreen',
+  DetailsRestaurantScreen: 'DetailsRestaurantScreen',
+  DetailsMenuScreen: 'DetailsMenuScreen',
+  EditProfileScreen: 'EditProfileScreen',
+  EditPhotoScreen: 'EditPhotoScreen',
+  EditPaymentDetailsScreen: 'EditPaymentDetailsScreen',
 };

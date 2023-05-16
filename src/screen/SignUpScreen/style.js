@@ -10,7 +10,7 @@ import {
 } from 'react-native-responsive-dimensions';
 
 import {theme} from '../../theme';
-import {fontPixel} from '../../scale/scaling';
+import {fontPixel, heightPixel} from '../../scale/scaling';
 export const styles = ({schema}) =>
   StyleSheet.create({
     container: {
@@ -49,7 +49,7 @@ export const styles = ({schema}) =>
     },
     errorDisplayContainer: {
       flexDirection: 'row',
-      alignSelf: 'flex-start',
       alignItems: 'center',
+      marginTop: heightPixel(1),
     },
   });

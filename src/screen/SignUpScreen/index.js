@@ -6,6 +6,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   SafeAreaView,
   ScrollView,
   Text,
@@ -65,15 +66,15 @@ const SignUpScreen = ({navigation}) => {
   }, []);
 
   const registration_ValidationSchema = yup.object().shape({
-    userName: yup
+    UserName: yup
       .string()
       .min(3, ({min}) => 'Please enter valid user name')
       .required('User Name is required'),
-    email: yup
+    Email: yup
       .string()
       .email('Please enter valid email')
       .required('Email Address is Required'),
-    password: yup
+    Password: yup
       .string()
       .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
       .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
@@ -95,6 +96,8 @@ const SignUpScreen = ({navigation}) => {
         <KeyboardAwareScrollView
           resetScrollToCoords={{x: 0, y: 0}}
           contentContainerStyle={{flexGrow: 1}}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
           bounces={false}
           scrollEnabled={isKeyboardVisible}>
           <View style={styles({schema}).container}>
@@ -111,18 +114,42 @@ const SignUpScreen = ({navigation}) => {
               <Formik
                 validationSchema={registration_ValidationSchema}
                 initialValues={{
-                  userName: '',
-                  email: '',
-                  password: '',
-                  rememberPassword: true,
-                  email_notification: true,
+                  UserName: '',
+                  Email: '',
+                  Password: '',
+                  RememberPassword: true,
+                  Email_Notification: true,
                 }}
                 onSubmit={async values => {
-                  console.log(values);
-                  const jsonValue = JSON.stringify(values);
-                  await AsyncStorage.setItem(Key.Account_Details, jsonValue);
-                  await AsyncStorage.setItem(Key.IsLogin, 'true');
-                  Log({msg: `Account Details: ${jsonValue}`});
+                  // console.log('SignUp Data:- ', values);
+                  const jsonSignUpValue = JSON.stringify(values);
+                  await AsyncStorage.setItem(
+                    Key.Account_Details,
+                    jsonSignUpValue,
+                  );
+                  await AsyncStorage.setItem(
+                    Key.UserName,
+                    values[Key.UserName],
+                  );
+                  await AsyncStorage.setItem(Key.Email, values[Key.Email]);
+                  await AsyncStorage.setItem(
+                    Key.Password,
+                    values[Key.Password],
+                  );
+                  await AsyncStorage.setItem(
+                    Key.RememberPassword,
+                    JSON.stringify(values[Key.RememberPassword]),
+                  );
+                  await AsyncStorage.setItem(
+                    Key.Email_Notification,
+                    JSON.stringify(values[Key.Email_Notification]),
+                  );
+                  Log({msg: `Account Details: ${jsonSignUpValue}`});
+                  Log({
+                    msg: `Account Details: ${await AsyncStorage.getItem(
+                      Key.Email,
+                    )}`,
+                  });
                   navigation.navigate(Screens.UserBioDataScreen);
                 }}>
                 {({
@@ -144,13 +171,14 @@ const SignUpScreen = ({navigation}) => {
                           alignItems="center">
                           <View>
                             <Input
-                              name="userName"
+                              name="UserName"
                               width="90%"
                               py={Platform.OS == 'ios' ? 4 : inputSize.size}
                               color={theme.colors[schema].text}
-                              onChangeText={handleChange('userName')}
-                              onBlur={handleBlur('userName')}
-                              value={values.userName}
+                              onChangeText={handleChange('UserName')}
+                              onBlur={handleBlur('UserName')}
+                              focusOutlineColor={'green.500'}
+                              value={values.UserName}
                               autoCapitalize="none"
                               InputLeftElement={
                                 <Icon
@@ -164,33 +192,33 @@ const SignUpScreen = ({navigation}) => {
                               borderRadius={heightPixel(16)}
                               style={styles({schema}).input}
                             />
-                            {errors.userName && touched.userName && (
+                            {errors.UserName && touched.UserName && (
                               <View
                                 style={styles({schema}).errorDisplayContainer}>
                                 <Icon
                                   as={<MaterialIcons name={'error'} />}
                                   size="3"
                                   mr={1}
-                                  mt={1}
                                   ml={2}
                                   color="#FF0000"
                                 />
                                 <Text style={styles({schema}).errorText}>
-                                  {errors.userName}
+                                  {errors.UserName}
                                 </Text>
                               </View>
                             )}
                           </View>
                           <View>
                             <Input
-                              name="email"
+                              name="Email"
                               width="90%"
                               py={Platform.OS == 'ios' ? 4 : inputSize.size}
                               color={theme.colors[schema].text}
+                              focusOutlineColor={'green.500'}
                               autoCapitalize="none"
-                              onChangeText={handleChange('email')}
-                              onBlur={handleBlur('email')}
-                              value={values.email}
+                              onChangeText={handleChange('Email')}
+                              onBlur={handleBlur('Email')}
+                              value={values.Email}
                               keyboardType="email-address"
                               InputLeftElement={
                                 <Icon
@@ -203,32 +231,33 @@ const SignUpScreen = ({navigation}) => {
                               fontSize={fontPixel(16)}
                               borderRadius={heightPixel(16)}
                             />
-                            {errors.email && touched.email && (
+                            {errors.Email && touched.Email && (
                               <View
                                 style={styles({schema}).errorDisplayContainer}>
                                 <Icon
                                   as={<MaterialIcons name={'error'} />}
                                   size="3"
                                   mr={1}
-                                  mt={1}
                                   ml={2}
                                   color="#FF0000"
                                 />
                                 <Text style={styles({schema}).errorText}>
-                                  {errors.email}
+                                  {errors.Email}
                                 </Text>
                               </View>
                             )}
                           </View>
                           <View>
                             <Input
-                              name="password"
+                              name="Password"
                               width="90%"
+                              type={show ? 'text' : 'password'}
                               py={Platform.OS == 'ios' ? 4 : inputSize.size}
+                              focusOutlineColor={'green.500'}
                               color={theme.colors[schema].text}
-                              onChangeText={handleChange('password')}
-                              onBlur={handleBlur('password')}
-                              value={values.password}
+                              onChangeText={handleChange('Password')}
+                              onBlur={handleBlur('Password')}
+                              value={values.Password}
                               autoCapitalize="none"
                               InputLeftElement={
                                 <Icon
@@ -237,23 +266,39 @@ const SignUpScreen = ({navigation}) => {
                                   size={heightPixel(6)}
                                 />
                               }
+                              InputRightElement={
+                                <Pressable onPress={() => setShow(!show)}>
+                                  <Icon
+                                    as={
+                                      <MaterialIcons
+                                        name={
+                                          show ? 'visibility' : 'visibility-off'
+                                        }
+                                      />
+                                    }
+                                    size={heightPixel(6)}
+                                    mr="4"
+                                    color={theme.colors.green_gradient}
+                                    opacity={0.7}
+                                  />
+                                </Pressable>
+                              }
                               placeholder={String.Password}
                               fontSize={fontPixel(16)}
                               borderRadius={heightPixel(16)}
                             />
-                            {errors.password && touched.password && (
+                            {errors.Password && touched.Password && (
                               <View
                                 style={styles({schema}).errorDisplayContainer}>
                                 <Icon
                                   as={<MaterialIcons name={'error'} />}
                                   size="3"
                                   mr={1}
-                                  mt={1}
                                   ml={2}
                                   color="#FF0000"
                                 />
                                 <Text style={styles({schema}).errorText}>
-                                  {errors.password}
+                                  {errors.Password}
                                 </Text>
                               </View>
                             )}
@@ -266,13 +311,13 @@ const SignUpScreen = ({navigation}) => {
                           <Checkbox
                             size="sm"
                             defaultIsChecked
-                            name="rememberPassword"
+                            name="RememberPassword"
                             colorScheme="green"
-                            checked={values.rememberPassword}
+                            checked={values.RememberPassword}
                             onPress={() =>
                               setFieldValue(
-                                'rememberPassword',
-                                !values.rememberPassword,
+                                'RememberPassword',
+                                !values.RememberPassword,
                               )
                             }
                             colorschema="green">
@@ -285,13 +330,13 @@ const SignUpScreen = ({navigation}) => {
                           <Checkbox
                             size="sm"
                             defaultIsChecked
-                            name="email_notification"
+                            name="Email_Notification"
                             colorScheme="green"
-                            checked={values.email_notification}
+                            checked={values.Email_Notification}
                             onPress={() =>
                               setFieldValue(
-                                'email_notification',
-                                !values.email_notification,
+                                'Email_Notification',
+                                !values.Email_Notification,
                               )
                             }
                             colorschema="green">
@@ -308,10 +353,10 @@ const SignUpScreen = ({navigation}) => {
                       <Stack space={heightPixel(4)} w="100%">
                         <CustomButton
                           title={String.Create_Account}
-                          // onPress={handleSubmit}
-                          onPress={() => {
-                            navigation.navigate(Screens.UserBioDataScreen);
-                          }}
+                          onPress={handleSubmit}
+                          // onPress={() => {
+                          //   navigation.navigate(Screens.UserBioDataScreen);
+                          // }}
                         />
                         <TouchableOpacity
                           onPress={() => {

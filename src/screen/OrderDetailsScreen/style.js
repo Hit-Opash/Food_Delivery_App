@@ -10,9 +10,9 @@ export const styles = ({schema}) =>
   StyleSheet.create({
     bg_img: {
       width: wp('100%'),
-      height: hp('30%'),
-      position: 'absolute',
+      height: heightPixel(200),
       opacity: 0.2,
+      position: 'absolute',
     },
     rootContainer: {
       flex: 1,

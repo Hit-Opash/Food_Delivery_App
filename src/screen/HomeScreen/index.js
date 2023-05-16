@@ -67,25 +67,42 @@ const menuData = [
     icon: Images.menu_1,
     name: 'Herbal Pancake',
     desc: 'Warung herbal',
-    price: '$7',
+    price: 7,
+    detail: `Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt. Velit non est cillum consequat cupidatat ex Lorem laboris labore aliqua ad duis eu laborum.
+
+Strowberry
+Cream
+wheat`,
   },
   {
     id: 2,
     icon: Images.menu_2,
     name: 'Fruit Salad',
     desc: 'Wijie Resto',
-    price: '$5',
+    price: 5,
+    detail: `Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt. Velit non est cillum consequat cupidatat ex Lorem laboris labore aliqua ad duis eu laborum.
+
+Strowberry
+Cream
+wheat`,
   },
   {
     id: 3,
     icon: Images.menu_3,
     name: 'Green Noddle',
     desc: 'Noodle Home',
-    price: '$15',
+    price: 15,
+    detail: `Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt. Velit non est cillum consequat cupidatat ex Lorem laboris labore aliqua ad duis eu laborum.
+
+Strowberry
+Cream
+wheat`,
   },
 ];
 
 const HomeScreen = ({navigation}) => {
+  const [menu, setMenu] = useState(menuData);
+  const [restaurantDisplay, setRestaurantDisplay] = useState(true);
   const scheme = useColorScheme();
   return (
     <>
@@ -122,9 +139,17 @@ const HomeScreen = ({navigation}) => {
                 />
               </TouchableOpacity>
             </View>
-            <SearchBar scheme={scheme} navigation={navigation} />
-            <RestaurantList scheme={scheme} />
-            <PopularMenuList />
+            <SearchBar
+              scheme={scheme}
+              navigation={navigation}
+              menu={menu}
+              setMenu={setMenu}
+              setRestaurantDisplay={setRestaurantDisplay}
+            />
+            {restaurantDisplay ? (
+              <RestaurantList scheme={scheme} navigation={navigation} />
+            ) : null}
+            <PopularMenuList navigation={navigation} menu={menu} />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -132,17 +157,37 @@ const HomeScreen = ({navigation}) => {
   );
 };
 
-const SearchBar = ({scheme, navigation}) => {
+const SearchBar = ({
+  scheme,
+  navigation,
+  menu,
+  setMenu,
+  setRestaurantDisplay,
+}) => {
   return (
     <View style={styles({scheme}).searchBarContainer}>
       <Input
         placeholder={String.Search_Hint}
         width="80%"
         py={Platform.OS == 'ios' ? 4 : inputSize.size}
+        color={theme.colors[scheme].text}
         borderRadius={heightPixel(16)}
         fontSize={fontPixel(14)}
         alignSelf="flex-start"
         autoCapitalize="none"
+        focusOutlineColor={'#DA6317'}
+        onChangeText={text => {
+          if (text == '' || text == null) {
+            setMenu(menuData);
+            setRestaurantDisplay(true);
+          } else {
+            const data = menuData.filter(element => {
+              return element.name.toLowerCase().match(text.toLowerCase());
+            });
+            setMenu(data);
+            setRestaurantDisplay(false);
+          }
+        }}
         InputLeftElement={
           <Icon
             ml="3"
@@ -162,7 +207,7 @@ const SearchBar = ({scheme, navigation}) => {
   );
 };
 
-const RestaurantList = ({scheme}) => {
+const RestaurantList = ({scheme, navigation}) => {
   const [scrollHorizontal, setscrollHorizontal] = useState(true);
 
   return (
@@ -191,7 +236,13 @@ const RestaurantList = ({scheme}) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           data={RestaurantData}
-          renderItem={({item}) => <RestaurantBox data={item} scheme={scheme} />}
+          renderItem={({item}) => (
+            <RestaurantBox
+              data={item}
+              scheme={scheme}
+              navigation={navigation}
+            />
+          )}
           keyExtractor={item => item.id}
           style={styles(scheme).flateList}
         />
@@ -201,7 +252,13 @@ const RestaurantList = ({scheme}) => {
           numColumns={2}
           scrollEnabled={false}
           data={RestaurantData}
-          renderItem={({item}) => <RestaurantBox data={item} scheme={scheme} />}
+          renderItem={({item}) => (
+            <RestaurantBox
+              data={item}
+              scheme={scheme}
+              navigation={navigation}
+            />
+          )}
           keyExtractor={item => item.id}
           style={styles(scheme).flateList}
         />
@@ -210,9 +267,15 @@ const RestaurantList = ({scheme}) => {
   );
 };
 
-const RestaurantBox = ({data, scheme}) => {
+const RestaurantBox = ({data, scheme, navigation}) => {
   return (
-    <TouchableOpacity style={styles({scheme}).box}>
+    <TouchableOpacity
+      style={styles({scheme}).box}
+      onPress={() => {
+        navigation.navigate(Screens.DetailsRestaurantScreen, {
+          data,
+        });
+      }}>
       <View style={styles({scheme}).boxImage}>
         <Image source={data.icon} style={styles({scheme}).image1} />
       </View>
@@ -224,9 +287,15 @@ const RestaurantBox = ({data, scheme}) => {
   );
 };
 
-const PopularMenuBox = ({data, scheme}) => {
+const PopularMenuBox = ({data, scheme, navigation}) => {
   return (
-    <TouchableOpacity style={styles({scheme}).menuBox}>
+    <TouchableOpacity
+      style={styles({scheme}).menuBox}
+      onPress={() => {
+        navigation.navigate(Screens.DetailsMenuScreen, {
+          data,
+        });
+      }}>
       <View style={styles({scheme}).leftPart}>
         <View>
           <Image source={data.icon} style={styles({scheme}).image2} />
@@ -245,7 +314,7 @@ const PopularMenuBox = ({data, scheme}) => {
         </View>
       </View>
       <CustomText
-        TEXT={data.price}
+        TEXT={'$' + data.price}
         FAMILY={theme.fonts.BentonSans_Bold}
         SIZE={fontPixel(22)}
         CUSTOM_STYLE={styles({scheme}).priceText}
@@ -253,13 +322,18 @@ const PopularMenuBox = ({data, scheme}) => {
     </TouchableOpacity>
   );
 };
-const PopularMenuList = () => {
+const PopularMenuList = ({navigation, menu}) => {
   const [scrollHorizontal, setscrollHorizontal] = useState(true);
   const scheme = useColorScheme();
 
   return (
     <View style={styles({scheme}).restauranlistContainer}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginBottom: heightPixel(12),
+        }}>
         <CustomText
           TEXT={String.Popular_Menu}
           FAMILY={theme.fonts.BentonSans_Bold}
@@ -268,8 +342,10 @@ const PopularMenuList = () => {
       </View>
       <FlatList
         scrollEnabled={false}
-        data={menuData}
-        renderItem={({item}) => <PopularMenuBox data={item} scheme={scheme} />}
+        data={menu}
+        renderItem={({item}) => (
+          <PopularMenuBox data={item} scheme={scheme} navigation={navigation} />
+        )}
         keyExtractor={item => item.id}
         style={styles(scheme).flateList}
       />

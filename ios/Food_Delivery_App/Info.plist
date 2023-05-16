@@ -37,6 +37,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We will need location access to get current locaiton.</string>
+	<key>Privacy – Camera Usage Description</key>
+	<string>App needs Camera Access Permission for testing</string>
+	<key>Privacy – Photo Library Additions Usage Description</key>
+	<string>App needs photo library Access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fonts/FontAwesome.ttf</string>

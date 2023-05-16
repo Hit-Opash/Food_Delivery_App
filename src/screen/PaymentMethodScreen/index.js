@@ -19,9 +19,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../theme';
 import CustomText from '../../component/CustomText';
 import {fontPixel, heightPixel} from '../../scale/scaling';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Key} from '../../common/storagekey';
 
 const PaymentMethodScreen = ({navigation}) => {
-  const [selected, setSelect] = useState(null);
+  const [selected, setSelect] = useState(0);
   const scheme = useColorScheme();
   const paymentMethod = [Images.PayPal, Images.Visa, Images.Payonner];
   return (
@@ -81,7 +83,6 @@ const PaymentMethodScreen = ({navigation}) => {
                   ]}
                   onPress={() => setSelect(id)}>
                   <Image source={element} style={styles({scheme}).img} />
-                  {console.log(element)}
                 </TouchableOpacity>
               );
             })}
@@ -89,7 +90,13 @@ const PaymentMethodScreen = ({navigation}) => {
           <View style={styles({scheme}).button}>
             <CustomButton
               title={String.Next}
-              onPress={() => {
+              onPress={async () => {
+                const jsonValue = JSON.stringify(selected);
+                await AsyncStorage.setItem(Key.PaymentMethod, jsonValue);
+                console.log(
+                  'Payment Method:- ',
+                  await AsyncStorage.getItem(Key.PaymentMethod),
+                );
                 navigation.navigate(Screens.UploadPhotoScreen);
               }}
             />

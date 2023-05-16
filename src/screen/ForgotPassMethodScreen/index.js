@@ -158,7 +158,7 @@ const ForgotPassMethodScreen = ({navigation}) => {
             <CustomButton
               title={String.Next}
               onPress={() => {
-                navigation.navigate(Screens.MobileVerificationScreen);
+                navigation.replace(Screens.MobileVerificationScreen);
               }}
             />
           </View>

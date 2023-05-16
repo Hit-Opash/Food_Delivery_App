@@ -34,7 +34,7 @@ export const Images = {
   Call: require('../../assets/images/ChattingScreen/Call_Icon.png'),
   Send: require('../../assets/images/ChattingScreen/Send_Icon.png'),
 
-  Restaurant_1: require('../../assets/images/Restaurant/Resturant_Image_1.png'),
+  Restaurant_1: require('../../assets/images/Restaurant/Restaurant_1.png'),
   Restaurant_2: require('../../assets/images/Restaurant/Restaurant_2.png'),
   Restaurant_3: require('../../assets/images/Restaurant/Restaurant_3.png'),
   Restaurant_4: require('../../assets/images/Restaurant/Restaurant_4.png'),
@@ -44,6 +44,12 @@ export const Images = {
   menu_1: require('../../assets/images/Popular_Menu/Menu_1.png'),
   menu_2: require('../../assets/images/Popular_Menu/Menu_2.png'),
   menu_3: require('../../assets/images/Popular_Menu/Menu_3.png'),
+  menu_4: require('../../assets/images/Popular_Menu/Menu_4.png'),
+  menu_5: require('../../assets/images/Popular_Menu/Menu_5.png'),
+  menu_6: require('../../assets/images/Popular_Menu/Menu_6.png'),
+  menu_7: require('../../assets/images/Popular_Menu/Menu_7.png'),
+  menu_8: require('../../assets/images/Popular_Menu/Menu_8.png'),
+
   Blur_Star: require('../../assets/images/RattingScreen/Blur_Star.png'),
   Fill_Star: require('../../assets/images/RattingScreen/Fill_Star.png'),
   Edit_Icon: require('../../assets/images/RattingScreen/Edit_Icon.png'),
@@ -69,4 +75,12 @@ export const Images = {
   Delivery_Men_Photo: require('../../assets/images/TrakOrderScreen/Delivery_Men_Photo.png'),
   Message_Icon: require('../../assets/images/TrakOrderScreen/Message_Icon.png'),
   Direction_Icon: require('../../assets/images/TrakOrderScreen/Direction_Icon.png'),
+
+  Fav_Icon: require('../../assets/images/DetailsRestaurantScreen/Fav_Icon.png'),
+  MapPin_Icon: require('../../assets/images/DetailsRestaurantScreen/MapPin_Icon.png'),
+  Location_Icon: require('../../assets/images/DetailsRestaurantScreen/Location_Icon.png'),
+  Restaurant_Photo: require('../../assets/images/DetailsRestaurantScreen/Restaurant_Photo.png'),
+  Star_Icon: require('../../assets/images/DetailsRestaurantScreen/Star_Icon.png'),
+
+  ShoppingBag: require('../../assets/images/DetailsMenuScreen/ShoppingBag.png'),
 };

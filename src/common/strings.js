@@ -98,5 +98,14 @@ export const String = {
   Deliver_To: 'Deliver To',
   Edit: 'Edit',
   Track_Orders: 'Track Orders',
+  Testimonials: 'Testimonials',
   Call: 'Call',
+  Popular: 'Popular',
+  Restaurant_Detail:
+    'Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .',
+  Add_To_Chart: 'Add To Chart',
+  Cart_Empty: 'Cart Is Empty',
+  Edit_Profile: 'Edit Profile',
+  SwitchTo_Other_Account: 'Switch to Other Account',
+  LogOut: 'Log Out',
 };

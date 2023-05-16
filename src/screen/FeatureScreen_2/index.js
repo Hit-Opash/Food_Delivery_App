@@ -58,7 +58,7 @@ const FeatureScreen1 = ({navigation}) => {
             <CustomButton
               title={String.Next}
               onPress={async () => {
-                await AsyncStorage.setItem(Key.IsFirstTime, 'false');
+                // await AsyncStorage.setItem(Key.IsFirstTime, false);
                 navigation.replace(Screens.SignUpScreen);
               }}
             />

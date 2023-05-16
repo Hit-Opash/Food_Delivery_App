@@ -45,6 +45,7 @@ export const styles = ({schema}) =>
       width: heightPixel(80),
       height: heightPixel(40),
       resizeMode: 'contain',
+      tintColor: schema == 'dark' ? 'white' : '',
     },
     dataContainer2: {
       justifyContent: 'space-between',

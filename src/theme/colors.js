@@ -40,7 +40,7 @@ export const colors = {
     text: '#000000',
     button_text: '#FEFEFF',
     green_gradient: ['#53E88B', '#15BE77'],
-    cardColor: '#ffffff',
+    cardColor: '#E8E8E8',
     border_color: '#F4F4F4',
     box_shadow: '#5A6CEA',
     green: '#53E88B',

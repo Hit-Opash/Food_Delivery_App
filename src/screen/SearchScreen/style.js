@@ -54,7 +54,7 @@ export const styles = ({schema}) =>
     topic: {
       paddingHorizontal: heightPixel(20),
       paddingVertical: heightPixel(16),
-      backgroundColor: '#FEAD1D',
+      backgroundColor: '#DA6317',
       borderRadius: heightPixel(16),
     },
     buttonContainer: {

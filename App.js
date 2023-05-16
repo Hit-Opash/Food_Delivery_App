@@ -12,6 +12,8 @@ import {
 } from 'react-native-safe-area-context';
 import Navigation from './src/navigation/navigation';
 import {NativeBaseProvider, extendTheme} from 'native-base';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 
 const App = () => {
   const schema = useColorScheme();

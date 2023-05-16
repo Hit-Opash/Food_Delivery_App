@@ -9,7 +9,7 @@ import {
   useColorScheme,
   Platform,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Images} from '../../common/images';
 import {styles} from './style';
 import {String} from '../../common/strings';
@@ -31,22 +31,39 @@ import {inputSize} from '../../theme/sizes';
 
 const UserBioDataScreen = ({navigation}) => {
   const schema = useColorScheme();
-  const [show, setShow] = React.useState(false);
+  const [f_name, setFName] = useState('');
+  const [l_name, setLName] = useState('');
   const [confirmShow, setConfirmShow] = React.useState(false);
   const bioData_ValidationSchema = yup.object().shape({
-    f_name: yup
+    First_Name: yup
       .string()
       .min(3, ({min}) => 'Please enter valid first name')
       .required('First name is required'),
-    l_name: yup
+    Last_Name: yup
       .string()
       .min(3, ({min}) => 'Please enter valid last name')
       .required('Last name is required'),
-    mobileNo: yup
+    MobileNo: yup
       .string()
-      .min(10, ({min}) => 'Please enter valid mobile number')
+      .matches(/(\+)?(91)?( )?[789]\d{9}/g, 'Please enter valid mobile number')
       .required('Mobile number is required'),
   });
+
+  useEffect(() => {
+    async function getData() {
+      const data = await AsyncStorage.getItem(Key.Account_Details);
+      const jsonSignUpValue = JSON.parse(data);
+      // console.log(jsonSignUpValue[Key.UserName]);
+      let name = await jsonSignUpValue[Key.UserName];
+      name = name.split(' ');
+      // setFName(name[0]);
+      // setLName(name[1]);
+      // console.log(name[0]);
+    }
+
+    getData();
+  }, []);
+
   return (
     <>
       <ImageBackground
@@ -58,6 +75,7 @@ const UserBioDataScreen = ({navigation}) => {
           resetScrollToCoords={{x: 0, y: 0}}
           contentContainerStyle={{flexGrow: 1}}
           bounces={false}
+          keyboardShouldPersistTaps="handled"
           scrollEnabled={true}>
           <View style={styles({schema}).forgotPass_container}>
             <TouchableOpacity
@@ -76,14 +94,22 @@ const UserBioDataScreen = ({navigation}) => {
             <Formik
               validationSchema={bioData_ValidationSchema}
               initialValues={{
-                f_name: 'Hit',
-                l_name: 'Doshi',
-                mobileNo: '',
+                First_Name: '',
+                Last_Name: '',
+                MobileNo: '',
               }}
               onSubmit={async values => {
-                console.log(values);
                 const jsonValue = JSON.stringify(values);
                 await AsyncStorage.setItem(Key.UserBioData, jsonValue);
+                await AsyncStorage.setItem(
+                  Key.First_Name,
+                  values[Key.First_Name],
+                );
+                await AsyncStorage.setItem(
+                  Key.Last_Name,
+                  values[Key.Last_Name],
+                );
+                await AsyncStorage.setItem(Key.MobileNo, values[Key.MobileNo]);
                 Log({msg: `UserBioData Details: ${jsonValue}`});
                 navigation.navigate(Screens.PaymentMethodScreen);
               }}>
@@ -145,20 +171,21 @@ const UserBioDataScreen = ({navigation}) => {
                   <Stack space={heightPixel(4)} w="100%" alignItems="center">
                     <View>
                       <Input
-                        name="f_name"
+                        name="First_Name"
                         width="100%"
                         py={Platform.OS == 'ios' ? 4 : inputSize.size}
                         color={theme.colors[schema].text}
                         autoCapitalize="none"
-                        onChangeText={handleChange('f_name')}
-                        onBlur={handleBlur('f_name')}
-                        value={values.f_name}
+                        onChangeText={handleChange('First_Name')}
+                        onBlur={handleBlur('First_Name')}
+                        value={values.First_Name}
                         placeholder={String.FirstName}
                         fontSize={fontPixel(16)}
                         borderRadius={heightPixel(16)}
+                        focusOutlineColor={'green.500'}
                         placeholderTextColor={theme.colors[schema].placeHolder}
                       />
-                      {errors.f_name && touched.f_name && (
+                      {errors.First_Name && touched.First_Name && (
                         <View style={styles({schema}).errorDisplayContainer}>
                           <Icon
                             as={<MaterialIcons name={'error'} />}
@@ -169,27 +196,28 @@ const UserBioDataScreen = ({navigation}) => {
                             color="#FF0000"
                           />
                           <Text style={styles({schema}).errorText}>
-                            {errors.f_name}
+                            {errors.First_Name}
                           </Text>
                         </View>
                       )}
                     </View>
                     <View>
                       <Input
-                        name="l_name"
+                        name="Last_Name"
                         width="100%"
                         py={Platform.OS == 'ios' ? 4 : inputSize.size}
-                        onChangeText={handleChange('l_name')}
-                        onBlur={handleBlur('l_name')}
-                        value={values.l_name}
+                        onChangeText={handleChange('Last_Name')}
+                        onBlur={handleBlur('Last_Name')}
+                        value={values.Last_Name}
                         color={theme.colors[schema].text}
+                        focusOutlineColor={'green.500'}
                         autoCapitalize="none"
                         placeholder={String.LastName}
                         fontSize={fontPixel(16)}
                         borderRadius={heightPixel(16)}
                         placeholderTextColor={theme.colors[schema].placeHolder}
                       />
-                      {errors.l_name && touched.l_name && (
+                      {errors.Last_Name && touched.Last_Name && (
                         <View style={styles({schema}).errorDisplayContainer}>
                           <Icon
                             as={<MaterialIcons name={'error'} />}
@@ -200,28 +228,29 @@ const UserBioDataScreen = ({navigation}) => {
                             color="#FF0000"
                           />
                           <Text style={styles({schema}).errorText}>
-                            {errors.l_name}
+                            {errors.Last_Name}
                           </Text>
                         </View>
                       )}
                     </View>
                     <View>
                       <Input
-                        name="mobileNo"
+                        name="MobileNo"
                         width="100%"
                         py={Platform.OS == 'ios' ? 4 : inputSize.size}
                         color={theme.colors[schema].text}
                         autoCapitalize="none"
                         placeholder={String.MobileNo}
+                        focusOutlineColor={'green.500'}
                         fontSize={fontPixel(16)}
                         borderRadius={heightPixel(16)}
                         keyboardType={'number-pad'}
-                        onChangeText={handleChange('mobileNo')}
-                        onBlur={handleBlur('mobileNo')}
-                        value={values.mobileNo}
+                        onChangeText={handleChange('MobileNo')}
+                        onBlur={handleBlur('MobileNo')}
+                        value={values.MobileNo}
                         placeholderTextColor={theme.colors[schema].placeHolder}
                       />
-                      {errors.mobileNo && touched.mobileNo && (
+                      {errors.MobileNo && touched.MobileNo && (
                         <View style={styles({schema}).errorDisplayContainer}>
                           <Icon
                             as={<MaterialIcons name={'error'} />}
@@ -232,7 +261,7 @@ const UserBioDataScreen = ({navigation}) => {
                             color="#FF0000"
                           />
                           <Text style={styles({schema}).errorText}>
-                            {errors.mobileNo}
+                            {errors.MobileNo}
                           </Text>
                         </View>
                       )}
