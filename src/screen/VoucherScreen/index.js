@@ -29,6 +29,13 @@ const VoucherScreen = ({navigation}) => {
       month: 'October',
       textColor: 'white',
       buttonColor: 'green',
+      data: {
+        id: 2,
+        icon: Images.menu_2,
+        name: 'Fruit Salad',
+        desc: 'Wijie Resto',
+        price: 5,
+      },
     },
     {
       id: 2,
@@ -36,6 +43,13 @@ const VoucherScreen = ({navigation}) => {
       month: 'October',
       color: 'gray',
       buttonColor: 'gray',
+      data: {
+        id: 2,
+        icon: Images.menu_1,
+        name: 'Fruit Salad',
+        desc: 'Wijie Resto',
+        price: 5,
+      },
     },
   ];
   return (
@@ -68,7 +82,7 @@ const VoucherScreen = ({navigation}) => {
             />
             {offer.map(element => {
               return (
-                <TouchableOpacity>
+                <TouchableOpacity key={element.id}>
                   <View style={styles({schema}).offerBg}>
                     <ImageBackground
                       source={element.img}
@@ -92,13 +106,7 @@ const VoucherScreen = ({navigation}) => {
                           style={styles({schema}).orderButtom}
                           onPress={() => {
                             navigation.navigate(Screens.DetailsMenuScreen, {
-                              data: {
-                                id: 2,
-                                icon: Images.menu_2,
-                                name: 'Fruit Salad',
-                                desc: 'Wijie Resto',
-                                price: 5,
-                              },
+                              data: element.data,
                             });
                           }}>
                           <CustomText

@@ -51,13 +51,11 @@ const UserBioDataScreen = ({navigation}) => {
 
   useEffect(() => {
     async function getData() {
-      const data = await AsyncStorage.getItem(Key.Account_Details);
-      const jsonSignUpValue = JSON.parse(data);
-      // console.log(jsonSignUpValue[Key.UserName]);
-      let name = await jsonSignUpValue[Key.UserName];
-      name = name.split(' ');
-      // setFName(name[0]);
-      // setLName(name[1]);
+      const userName = await AsyncStorage.getItem(Key.UserName);
+      // let userName = JSON.parse(data);
+      const name = userName.split(' ');
+      setFName(name[0]);
+      setLName(name[1]);
       // console.log(name[0]);
     }
 
@@ -92,10 +90,11 @@ const UserBioDataScreen = ({navigation}) => {
               />
             </TouchableOpacity>
             <Formik
+              enableReinitialize
               validationSchema={bioData_ValidationSchema}
               initialValues={{
-                First_Name: '',
-                Last_Name: '',
+                First_Name: f_name,
+                Last_Name: l_name,
                 MobileNo: '',
               }}
               onSubmit={async values => {

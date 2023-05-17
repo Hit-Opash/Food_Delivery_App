@@ -149,6 +149,7 @@ const EditProfileScreen = ({navigation}) => {
                 </TouchableOpacity>
               </View>
               <Formik
+                enableReinitialize
                 validationSchema={registration_ValidationSchema}
                 initialValues={{
                   UserName: userName,

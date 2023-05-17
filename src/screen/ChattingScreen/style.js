@@ -36,7 +36,9 @@ export const styles = ({schema}) =>
     },
     scrollView: {
       paddingRight: heightPixel(15),
-      height: '55%',
+      flex: 1,
+      marginBottom: 80,
+      width: wp('90%'),
     },
     bgImg: {
       width: wp('15%'),

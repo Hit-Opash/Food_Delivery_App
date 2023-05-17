@@ -176,7 +176,7 @@ const SetLocationScreen = ({navigation}) => {
                 LINE_HEIGHT={heightPixel(16)}
               />
               <CustomText
-                TEXT={('  ,  ', address)}
+                TEXT={(' , ')}
                 SIZE={fontPixel(14)}
                 LINE_HEIGHT={heightPixel(16)}
               />

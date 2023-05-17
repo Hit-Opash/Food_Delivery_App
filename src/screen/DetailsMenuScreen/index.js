@@ -173,7 +173,12 @@ const DetailsMenuScreen = ({navigation, route}) => {
           borderRadius: 28,
           backgroundColor: schema == 'dark' ? 'black' : 'white',
         }}>
-        <UserData navigation={navigation} data={data} />
+        <BottomSheetScrollView
+          contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
+          showsVerticalScrollIndicator={false}
+          bounces={false}>
+          <UserData navigation={navigation} data={data} />
+        </BottomSheetScrollView>
       </BottomSheet>
       <CustomButton
         title={String.Add_To_Chart}
@@ -203,89 +208,81 @@ const UserData = ({navigation, data}) => {
   const itemInFav = favList.find(item => item.id === data.id);
 
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
-      showsVerticalScrollIndicator={false}
-      bounces={false}>
-      <View style={styles({schema}).bottomSheet_Container}>
-        <View style={styles({schema}).headerContainer}>
-          <View style={styles({schema}).goldMemberText}>
-            <CustomText
-              TEXT={String.Popular}
-              FAMILY={theme.fonts.BentonSans_Medium}
-              SIZE={fontPixel(12)}
-              COLOR={'green'}
-            />
-          </View>
-          <View style={styles({schema}).headerRightPart}>
-            <Image
-              source={Images.MapPin_Icon}
-              style={styles({schema}).headerImg}
-            />
-            {/* <Image
+    <View style={styles({schema}).bottomSheet_Container}>
+      <View style={styles({schema}).headerContainer}>
+        <View style={styles({schema}).goldMemberText}>
+          <CustomText
+            TEXT={String.Popular}
+            FAMILY={theme.fonts.BentonSans_Medium}
+            SIZE={fontPixel(12)}
+            COLOR={'green'}
+          />
+        </View>
+        <View style={styles({schema}).headerRightPart}>
+          <Image
+            source={Images.MapPin_Icon}
+            style={styles({schema}).headerImg}
+          />
+          {/* <Image
               source={Images.Fav_Icon}
               style={styles({schema}).headerImg}
             /> */}
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(favItem(data));
-              }}>
-              <MaterialIcons
-                name={itemInFav ? 'heart' : 'heart-o'}
-                color="red"
-                size={widthPixel(22)}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(favItem(data));
+            }}>
+            <MaterialIcons
+              name={itemInFav ? 'heart' : 'heart-o'}
+              color="red"
+              size={widthPixel(22)}
+            />
+          </TouchableOpacity>
         </View>
-        <View style={styles({schema}).userNameContainer}>
+      </View>
+      <View style={styles({schema}).userNameContainer}>
+        <CustomText
+          TEXT={data.name}
+          SIZE={heightPixel(28)}
+          FAMILY={theme.fonts.BentonSans_Bold}
+          LINE_HEIGHT={heightPixel(36)}
+        />
+      </View>
+      <View style={styles({schema}).ratting_distance}>
+        <View style={styles({schema}).row}>
+          <Image source={Images.Star_Icon} style={styles({schema}).headerImg} />
           <CustomText
-            TEXT={data.name}
-            SIZE={heightPixel(28)}
-            FAMILY={theme.fonts.BentonSans_Bold}
-            LINE_HEIGHT={heightPixel(36)}
+            TEXT={'4.8 Ratting'}
+            SIZE={fontPixel(14)}
+            LINE_HEIGHT={heightPixel(14)}
           />
         </View>
-        <View style={styles({schema}).ratting_distance}>
-          <View style={styles({schema}).row}>
-            <Image
-              source={Images.Star_Icon}
-              style={styles({schema}).headerImg}
-            />
-            <CustomText
-              TEXT={'4.8 Ratting'}
-              SIZE={fontPixel(14)}
-              LINE_HEIGHT={heightPixel(14)}
-            />
-          </View>
-          <View style={styles({schema}).row}>
-            <Image
-              source={Images.ShoppingBag}
-              style={styles({schema}).headerImg}
-            />
-            <CustomText
-              TEXT={'2000+ Order'}
-              SIZE={heightPixel(14)}
-              LINE_HEIGHT={heightPixel(14)}
-            />
-          </View>
+        <View style={styles({schema}).row}>
+          <Image
+            source={Images.ShoppingBag}
+            style={styles({schema}).headerImg}
+          />
+          <CustomText
+            TEXT={'2000+ Order'}
+            SIZE={heightPixel(14)}
+            LINE_HEIGHT={heightPixel(14)}
+          />
         </View>
-        <CustomText
-          TEXT={String.Restaurant_Detail}
-          SIZE={fontPixel(12)}
-          LINE_HEIGHT={heightPixel(22)}
-          FAMILY={theme.fonts.BentonSans_Book}
-          CUSTOM_STYLE={{textAlign: 'left'}}
-        />
-        <CustomText
-          TEXT={data.detail}
-          CUSTOM_STYLE={{textAlign: 'left'}}
-          SIZE={fontPixel(12)}
-          LINE_HEIGHT={heightPixel(22)}
-        />
-        <RattingList />
       </View>
-    </ScrollView>
+      <CustomText
+        TEXT={String.Restaurant_Detail}
+        SIZE={fontPixel(12)}
+        LINE_HEIGHT={heightPixel(22)}
+        FAMILY={theme.fonts.BentonSans_Book}
+        CUSTOM_STYLE={{textAlign: 'left'}}
+      />
+      <CustomText
+        TEXT={data.detail}
+        CUSTOM_STYLE={{textAlign: 'left'}}
+        SIZE={fontPixel(12)}
+        LINE_HEIGHT={heightPixel(22)}
+      />
+      <RattingList />
+    </View>
   );
 };
 

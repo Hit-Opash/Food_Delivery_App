@@ -9,6 +9,7 @@ import {
   useColorScheme,
   Platform,
   PermissionsAndroid,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Images} from '../../common/images';
@@ -93,10 +94,11 @@ const UploadPhotoScreen = ({navigation}) => {
       launchCamera(options, async response => {
         console.log('Response = ', response);
 
-        if (response.didCancel) {
-          alert('User cancelled camera picker');
-          return;
-        } else if (response.errorCode == 'camera_unavailable') {
+        // if (response.didCancel) {
+        //   alert('User cancelled camera picker');
+        //   return;
+        // }
+        if (response.errorCode == 'camera_unavailable') {
           alert('Camera not available on device');
           return;
         } else if (response.errorCode == 'permission') {
@@ -122,11 +124,11 @@ const UploadPhotoScreen = ({navigation}) => {
   async function storeData() {
     await AsyncStorage.setItem(Key.Profile_Img, JSON.stringify(filePath));
     console.log('Profile Img:- ', await AsyncStorage.getItem(Key.Profile_Img));
+    await navigation.navigate(Screens.UploadPreviewScreen);
   }
 
   if (filePath != null) {
     storeData();
-    navigation.navigate(Screens.UploadPreviewScreen);
   }
   const chooseFile = type => {
     let options = {
@@ -135,10 +137,11 @@ const UploadPhotoScreen = ({navigation}) => {
     launchImageLibrary(options, response => {
       console.log('Response = ', response);
 
-      if (response.didCancel) {
-        alert('User cancelled camera picker');
-        return;
-      } else if (response.errorCode == 'camera_unavailable') {
+      // if (response.didCancel) {
+      //   alert('User cancelled camera picker');
+      //   return;
+      // }
+      if (response.errorCode == 'camera_unavailable') {
         alert('Camera not available on device');
         return;
       } else if (response.errorCode == 'permission') {

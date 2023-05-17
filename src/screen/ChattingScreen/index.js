@@ -8,8 +8,9 @@ import {
   ScrollView,
   FlatList,
   Platform,
+  Keyboard,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './style';
 import {Images} from '../../common/images';
 import {theme} from '../../theme';
@@ -25,9 +26,44 @@ import {inputSize} from '../../theme/sizes';
 const ChattingScreen = ({navigation, route}) => {
   const schema = useColorScheme();
   const {id, name, desk, dp, time, status} = route.params.data;
-  const [chat, setChat] = useState(['Hello']);
+  const [chat, setChat] = useState([
+    {
+      msg: 'Hello',
+      from: 0,
+    },
+  ]);
   const [text, setText] = useState('');
   const scrollViewRef = useRef();
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const flatList = React.useRef(null);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // or some other action
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // or some other action
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+
+  async function fetchRandomMsg() {
+    const res = await fetch('https://api.adviceslip.com/advice');
+    let data = await res.json();
+    data = await data.slip.advice;
+    console.log('Receive msg:- ', data);
+    return data;
+  }
   return (
     <>
       <ImageBackground
@@ -35,6 +71,14 @@ const ChattingScreen = ({navigation, route}) => {
         style={styles({schema}).bg_img}
       />
       <SafeAreaView style={{flex: 1}}>
+        {/* <KeyboardAwareScrollView
+          resetScrollToCoords={{x: 0, y: 0}}
+          contentContainerStyle={{flexGrow: 1}}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          stickyHeaderIndices={[1]}
+          scrollEnabled={false}> */}
         <View style={styles({schema}).chattingScreen_container}>
           <TouchableOpacity
             onPress={() => {
@@ -92,16 +136,21 @@ const ChattingScreen = ({navigation, route}) => {
             </View>
           </View>
 
-          <View style={{width: '100%'}}>
+          <View style={{width: '100%', flex: 1}}>
             <FlatList
               data={chat}
+              showsVerticalScrollIndicator={false}
               style={styles({schema}).scrollView}
+              ref={flatList}
+              onContentSizeChange={() => {
+                flatList.current.scrollToEnd();
+              }}
               renderItem={({item, index}) => (
                 <ChatText
-                  msg={item}
-                  bgColor="lightgreen"
-                  position="flex-end"
-                  textColor="black"
+                  chat={item}
+                  bgColor={item.from == 0 ? '#E8E8E8' : '#15BE77'}
+                  position={item.from == 0 ? 'flex-start' : 'flex-end'}
+                  textColor={item.from == 0 ? 'black' : 'white'}
                 />
               )}
               keyExtractor={(item, index) => index}
@@ -110,7 +159,7 @@ const ChattingScreen = ({navigation, route}) => {
           <View style={styles({schema}).chatBox}>
             <Input
               backgroundColor={'white'}
-              py={Platform.OS == 'ios' ? 4 : inputSize}
+              py={Platform.OS == 'ios' ? 4 : inputSize.size}
               borderRadius={heightPixel(12)}
               multiline={true}
               value={text}
@@ -121,11 +170,18 @@ const ChattingScreen = ({navigation, route}) => {
                 <Icon
                   as={
                     <TouchableOpacity
-                      onPress={() => {
-                        if (text != '') {
-                          setChat([...chat, text]);
+                      onPress={async () => {
+                        if (text.trim() != '') {
                           setText(null);
+                          setChat([...chat, {msg: text, from: 1}]);
+                          const resMsg = await fetchRandomMsg();
+                          setChat([
+                            ...chat,
+                            {msg: text, from: 1},
+                            {msg: resMsg, from: 0},
+                          ]);
                         }
+                        flatList.current.scrollToEnd();
                       }}>
                       <Image source={Images.Send} />
                     </TouchableOpacity>
@@ -137,13 +193,14 @@ const ChattingScreen = ({navigation, route}) => {
             />
           </View>
         </View>
+        {/* </KeyboardAwareScrollView> */}
       </SafeAreaView>
     </>
   );
 };
 
 const ChatText = ({
-  msg,
+  chat,
   bgColor = 'lightblue',
   position = 'flex-start',
   textColor = 'black',
@@ -159,7 +216,12 @@ const ChatText = ({
         alignItems: 'flex-start',
         marginVertical: heightPixel(5),
       }}>
-      <CustomText TEXT={msg} COLOR={textColor} SIZE={heightPixel(14)} />
+      <CustomText
+        TEXT={chat.msg}
+        COLOR={textColor}
+        SIZE={heightPixel(14)}
+        CUSTOM_STYLE={{textAlign: 'left'}}
+      />
     </View>
   );
 };

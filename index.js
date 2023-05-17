@@ -11,12 +11,13 @@ import {store} from './src/redux/store';
 
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
+import SplashScreen from './src/screen/SplashScreen';
 
 let persistor = persistStore(store);
 
 const RNRedux = () => (
   <Provider store={store}>
-    <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+    <PersistGate loading={<SplashScreen />} persistor={persistor}>
       <App />
     </PersistGate>
   </Provider>

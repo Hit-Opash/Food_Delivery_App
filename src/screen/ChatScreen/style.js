@@ -11,7 +11,7 @@ export const styles = ({schema}) =>
       alignItems: 'center',
       marginHorizontal: wp('5%'),
       gap: heightPixel(20),
-      margin: hp('5%'),
+      marginTop: 20,
     },
     bg_img: {
       width: wp('100%'),

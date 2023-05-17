@@ -37,11 +37,6 @@ export const styles = ({schema}) =>
       justifyContent: 'space-between',
     },
     titleText: {},
-    createAccount: {
-      textDecorationLine: 'underline',
-      textAlign: 'center',
-      color: 'green',
-    },
     input: {},
     errorText: {
       color: '#FF0000',

@@ -51,6 +51,7 @@ import DetailsMenuScreen from '../screen/DetailsMenuScreen';
 import EditProfileScreen from '../screen/EditProfileScreen';
 import EditPhotoScreen from '../screen/EditPhotoScreen';
 import EditPaymentDetailsScreen from '../screen/EditPaymentDetailsScreen';
+import RenderScreen from '../screen/RenderScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -58,8 +59,9 @@ const Tab = createBottomTabNavigator();
 const Navigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="ResetPasswordScreen"
+      initialRouteName="RenderScreen"
       screenOptions={{headerShown: false}}>
+      <Stack.Screen name="RenderScreen" component={RenderScreen} />
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="FeatureScreen1" component={FeatureScreen1} />
       <Stack.Screen name="FeatureScreen2" component={FeatureScreen2} />

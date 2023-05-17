@@ -230,7 +230,12 @@ const TrackOrderScreen = ({navigation}) => {
               styles({schema}).gradientBox,
               styles({schema}).submitButton,
             ]}>
-            <TouchableOpacity style={styles({schema}).submitButton}>
+            <TouchableOpacity
+              style={styles({schema}).submitButton}
+              onPress={() => {
+                // navigation.popToTop();
+                navigation.replace(Screens.CallScreen);
+              }}>
               <Image
                 source={Images.Call_Icon}
                 style={{
@@ -248,7 +253,7 @@ const TrackOrderScreen = ({navigation}) => {
             style={styles({schema}).msgButton}
             onPress={() => {
               // navigation.popToTop();
-              navigation.replace(Screens.BottomTab);
+              navigation.replace(Screens.ChatScreen);
             }}>
             <Image
               source={Images.Message_Icon}

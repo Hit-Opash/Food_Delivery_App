@@ -89,7 +89,7 @@ const EditPaymentDetailsScreen = ({navigation}) => {
           </Stack>
           <View style={styles({scheme}).button}>
             <CustomButton
-              title={String.Next}
+              title={String.Save}
               onPress={async () => {
                 const jsonValue = JSON.stringify(selected);
                 await AsyncStorage.setItem(Key.PaymentMethod, jsonValue);

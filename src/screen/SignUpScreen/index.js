@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Checkbox, Icon, Input, Stack} from 'native-base';
+import {Box, Checkbox, Icon, Input, Stack, useToast} from 'native-base';
 import {
   Image,
   ImageBackground,
@@ -86,6 +86,9 @@ const SignUpScreen = ({navigation}) => {
       .min(8, ({min}) => `Password must be at least ${min} characters`)
       .required('Password is required'),
   });
+
+  const toast = useToast();
+
   return (
     <>
       <ImageBackground
@@ -112,11 +115,12 @@ const SignUpScreen = ({navigation}) => {
                 FAMILY={theme.fonts.BentonSans_Bold}
               />
               <Formik
+                enableReinitialize
                 validationSchema={registration_ValidationSchema}
                 initialValues={{
                   UserName: '',
-                  Email: '',
-                  Password: '',
+                  Email: 'hitdoshi@gmail.com',
+                  Password: 'HitDoshi13@',
                   RememberPassword: true,
                   Email_Notification: true,
                 }}
@@ -149,6 +153,10 @@ const SignUpScreen = ({navigation}) => {
                     msg: `Account Details: ${await AsyncStorage.getItem(
                       Key.Email,
                     )}`,
+                  });
+                  toast.show({
+                    title: 'Successfully account created',
+                    duration: 1500,
                   });
                   navigation.navigate(Screens.UserBioDataScreen);
                 }}>
@@ -364,10 +372,10 @@ const SignUpScreen = ({navigation}) => {
                           }}>
                           <CustomText
                             TEXT={String.Already_Have_An_Account}
-                            COLOR={theme.colors[schema].text}
                             SIZE={heightPixel(12)} //12
                             FAMILY={theme.fonts.BentonSans_Book}
                             UNDERLINE={true}
+                            COLOR={'#53E88B'}
                           />
                         </TouchableOpacity>
                       </Stack>

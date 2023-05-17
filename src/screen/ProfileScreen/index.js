@@ -130,7 +130,12 @@ const ProfileScreen = ({navigation}) => {
           borderRadius: 28,
           backgroundColor: schema == 'dark' ? 'black' : 'white',
         }}>
-        <UserData navigation={navigation} />
+        <BottomSheetScrollView
+          contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
+          showsVerticalScrollIndicator={false}
+          bounces={false}>
+          <UserData navigation={navigation} />
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
@@ -158,120 +163,115 @@ const UserData = ({navigation}) => {
   });
 
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
-      showsVerticalScrollIndicator={false}
-      bounces={false}>
-      <View style={styles({schema}).bottomSheet_Container}>
-        <View style={styles({schema}).goldMemberText}>
+    <View style={styles({schema}).bottomSheet_Container}>
+      <View style={styles({schema}).goldMemberText}>
+        <CustomText
+          TEXT={String.Member_Gold}
+          FAMILY={theme.fonts.BentonSans_Medium}
+          SIZE={fontPixel(12)}
+        />
+      </View>
+      <View style={styles({schema}).userNameContainer}>
+        <View>
           <CustomText
-            TEXT={String.Member_Gold}
-            FAMILY={theme.fonts.BentonSans_Medium}
-            SIZE={fontPixel(12)}
+            TEXT={userName}
+            SIZE={heightPixel(28)}
+            FAMILY={theme.fonts.BentonSans_Bold}
+            LINE_HEIGHT={heightPixel(36)}
+            CUSTOM_STYLE={{textAlign: 'left'}}
+            COLOR={theme.colors[schema].text}
           />
-        </View>
-        <View style={styles({schema}).userNameContainer}>
-          <View>
-            <CustomText
-              TEXT={userName}
-              SIZE={heightPixel(28)}
-              FAMILY={theme.fonts.BentonSans_Bold}
-              LINE_HEIGHT={heightPixel(36)}
-              CUSTOM_STYLE={{textAlign: 'left'}}
-              COLOR={theme.colors[schema].text}
-            />
-            <CustomText
-              TEXT={email}
-              SIZE={heightPixel(14)}
-              LINE_HEIGHT={heightPixel(22)}
-              CUSTOM_STYLE={{textAlign: 'left'}}
-              COLOR={theme.colors[schema].text}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(Screens.EditProfileScreen);
-            }}>
-            <Image
-              source={Images.Edit_Pencil_Icon}
-              style={styles({schema}).edit_pencile_icon}
-            />
-          </TouchableOpacity>
+          <CustomText
+            TEXT={email}
+            SIZE={heightPixel(14)}
+            LINE_HEIGHT={heightPixel(22)}
+            CUSTOM_STYLE={{textAlign: 'left'}}
+            COLOR={theme.colors[schema].text}
+          />
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(Screens.VoucherScreen);
+            navigation.navigate(Screens.EditProfileScreen);
           }}>
-          <View style={styles({schema}).voucherContainer}>
-            <Image
-              source={Images.Voucher_Icon}
-              style={styles({schema}).voucherIcon}
-            />
-            <CustomText
-              TEXT={'You Have 3 Voucher'}
-              FAMILY={theme.fonts.BentonSans_Medium}
-              SIZE={heightPixel(15)}
-              LINE_HEIGHT={heightPixel(20)}
-            />
-          </View>
+          <Image
+            source={Images.Edit_Pencil_Icon}
+            style={styles({schema}).edit_pencile_icon}
+          />
         </TouchableOpacity>
-        {favList.length > 0 && (
-          <View style={styles({schema}).favouriteContainer}>
-            <CustomText
-              TEXT={String.Favourite}
-              SIZE={heightPixel(15)}
-              FAMILY={theme.fonts.BentonSans_Bold}
-              LINE_HEIGHT={heightPixel(20)}
-            />
-            {favList.map(element => {
-              return (
-                <View style={styles({schema}).orderContainer} key={element.id}>
-                  <View>
-                    <Image
-                      source={element.icon}
-                      style={styles({schema}).orderImg}
-                    />
-                  </View>
-                  <View style={styles({schema}).textPart}>
-                    <View style={styles({schema}).details}>
-                      <CustomText
-                        TEXT={element.name}
-                        FAMILY={theme.fonts.BentonSans_Medium}
-                        SIZE={heightPixel(15)}
-                        LINE_HEIGHT={heightPixel(20)}
-                        CUSTOM_STYLE={{flexWrap: 'wrap'}}
-                      />
-                      <CustomText TEXT={element.desc} SIZE={heightPixel(14)} />
-                      <CustomText
-                        TEXT={'$ ' + element.price}
-                        FAMILY={theme.fonts.BentonSans_Bold}
-                        SIZE={heightPixel(20)}
-                        LINE_HEIGHT={heightPixel(24)}
-                        COLOR={'#53E88B'}
-                      />
-                    </View>
-                  </View>
-                  <TouchableOpacity
-                    style={styles({schema}).buyAgainButtom}
-                    onPress={() => {
-                      navigation.navigate(Screens.DetailsMenuScreen, {
-                        data: element,
-                      });
-                    }}>
-                    <CustomText
-                      TEXT={String.Buy_Again}
-                      SIZE={heightPixel(12)}
-                      LINE_HEIGHT={heightPixel(12)}
-                      FAMILY={theme.fonts.BentonSans_Medium}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
-        )}
       </View>
-    </ScrollView>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(Screens.VoucherScreen);
+        }}>
+        <View style={styles({schema}).voucherContainer}>
+          <Image
+            source={Images.Voucher_Icon}
+            style={styles({schema}).voucherIcon}
+          />
+          <CustomText
+            TEXT={'You Have 3 Voucher'}
+            FAMILY={theme.fonts.BentonSans_Medium}
+            SIZE={heightPixel(15)}
+            LINE_HEIGHT={heightPixel(20)}
+          />
+        </View>
+      </TouchableOpacity>
+      {favList.length > 0 && (
+        <View style={styles({schema}).favouriteContainer}>
+          <CustomText
+            TEXT={String.Favourite}
+            SIZE={heightPixel(15)}
+            FAMILY={theme.fonts.BentonSans_Bold}
+            LINE_HEIGHT={heightPixel(20)}
+          />
+          {favList.map(element => {
+            return (
+              <View style={styles({schema}).orderContainer} key={element.id}>
+                <View>
+                  <Image
+                    source={element.icon}
+                    style={styles({schema}).orderImg}
+                  />
+                </View>
+                <View style={styles({schema}).textPart}>
+                  <View style={styles({schema}).details}>
+                    <CustomText
+                      TEXT={element.name}
+                      FAMILY={theme.fonts.BentonSans_Medium}
+                      SIZE={heightPixel(15)}
+                      LINE_HEIGHT={heightPixel(20)}
+                      CUSTOM_STYLE={{flexWrap: 'wrap'}}
+                    />
+                    <CustomText TEXT={element.desc} SIZE={heightPixel(14)} />
+                    <CustomText
+                      TEXT={'$ ' + element.price}
+                      FAMILY={theme.fonts.BentonSans_Bold}
+                      SIZE={heightPixel(20)}
+                      LINE_HEIGHT={heightPixel(24)}
+                      COLOR={'#53E88B'}
+                    />
+                  </View>
+                </View>
+                <TouchableOpacity
+                  style={styles({schema}).buyAgainButtom}
+                  onPress={() => {
+                    navigation.navigate(Screens.DetailsMenuScreen, {
+                      data: element,
+                    });
+                  }}>
+                  <CustomText
+                    TEXT={String.Buy_Again}
+                    SIZE={heightPixel(12)}
+                    LINE_HEIGHT={heightPixel(12)}
+                    FAMILY={theme.fonts.BentonSans_Medium}
+                  />
+                </TouchableOpacity>
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
   );
 };
 

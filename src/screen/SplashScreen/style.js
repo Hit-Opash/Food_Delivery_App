@@ -10,16 +10,28 @@ export const styles = ({schema}) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    mainContainer: {
-      flex: 1,
-      justifyContent: 'center',
-    },
+    // mainContainer: {
+    //   flex: 1,
+    //   justifyContent: 'center',
+    // },
+    // logoImageContainer: {
+    //   alignItems: 'center',
+    // },
+    // textPart: {},
+    // logoImage: {
+    //   resizeMode: 'contain',
+    //   width: widthPercentageToDP('50%'),
+    // },
+    mainContainer: {},
     logoImageContainer: {
       alignItems: 'center',
+      flex: 1,
+      justifyContent: 'flex-end',
     },
-    textPart: {},
+    textPart: {
+      flex: 1,
+    },
     logoImage: {
       resizeMode: 'contain',
-      width: widthPercentageToDP('50%'),
     },
   });

@@ -198,14 +198,6 @@ const DetailsRestaurantScreen = ({navigation, route}) => {
     sheetRef.current?.close();
   }, []);
   // render
-  const renderItem = useCallback(
-    item => (
-      <View key={item} style={styles.itemContainer}>
-        <Text>{item}</Text>
-      </View>
-    ),
-    [],
-  );
   return (
     <View style={styles({schema}).rootContainer}>
       <TouchableOpacity
@@ -237,7 +229,12 @@ const DetailsRestaurantScreen = ({navigation, route}) => {
           borderRadius: 28,
           backgroundColor: schema == 'dark' ? 'black' : 'white',
         }}>
-        <UserData navigation={navigation} data={data} />
+        <BottomSheetScrollView
+          contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
+          showsVerticalScrollIndicator={false}
+          bounces={false}>
+          <UserData navigation={navigation} data={data} />
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
@@ -246,74 +243,63 @@ const DetailsRestaurantScreen = ({navigation, route}) => {
 const UserData = ({navigation, data}) => {
   const schema = useColorScheme();
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1, paddingBottom: heightPixel(100)}}
-      showsVerticalScrollIndicator={false}
-      bounces={false}>
-      <View style={styles({schema}).bottomSheet_Container}>
-        <View style={styles({schema}).headerContainer}>
-          <View style={styles({schema}).goldMemberText}>
-            <CustomText
-              TEXT={String.Popular}
-              FAMILY={theme.fonts.BentonSans_Medium}
-              SIZE={fontPixel(12)}
-              COLOR={'green'}
-            />
-          </View>
-          <View style={styles({schema}).headerRightPart}>
-            <Image
-              source={Images.MapPin_Icon}
-              style={styles({schema}).headerImg}
-            />
-            <Image
-              source={Images.Fav_Icon}
-              style={styles({schema}).headerImg}
-            />
-          </View>
-        </View>
-        <View style={styles({schema}).userNameContainer}>
+    <View style={styles({schema}).bottomSheet_Container}>
+      <View style={styles({schema}).headerContainer}>
+        <View style={styles({schema}).goldMemberText}>
           <CustomText
-            TEXT={data.name}
-            SIZE={heightPixel(28)}
-            FAMILY={theme.fonts.BentonSans_Bold}
-            LINE_HEIGHT={heightPixel(36)}
+            TEXT={String.Popular}
+            FAMILY={theme.fonts.BentonSans_Medium}
+            SIZE={fontPixel(12)}
+            COLOR={'green'}
           />
         </View>
-        <View style={styles({schema}).ratting_distance}>
-          <View style={styles({schema}).row}>
-            <Image
-              source={Images.MapPin_Icon}
-              style={styles({schema}).headerImg}
-            />
-            <CustomText
-              TEXT={'19 Km'}
-              SIZE={fontPixel(14)}
-              LINE_HEIGHT={heightPixel(14)}
-            />
-          </View>
-          <View style={styles({schema}).row}>
-            <Image
-              source={Images.Star_Icon}
-              style={styles({schema}).headerImg}
-            />
-            <CustomText
-              TEXT={'4.8 Ratting'}
-              SIZE={heightPixel(14)}
-              LINE_HEIGHT={heightPixel(14)}
-            />
-          </View>
+        <View style={styles({schema}).headerRightPart}>
+          <Image
+            source={Images.MapPin_Icon}
+            style={styles({schema}).headerImg}
+          />
+          <Image source={Images.Fav_Icon} style={styles({schema}).headerImg} />
         </View>
-        <CustomText
-          TEXT={String.Restaurant_Detail}
-          SIZE={fontPixel(12)}
-          LINE_HEIGHT={heightPixel(22)}
-          FAMILY={theme.fonts.BentonSans_Book}
-          CUSTOM_STYLE={{textAlign: 'left'}}
-        />
-        <PopularMenuList navigation={navigation} />
-        <RattingList />
       </View>
-    </ScrollView>
+      <View style={styles({schema}).userNameContainer}>
+        <CustomText
+          TEXT={data.name}
+          SIZE={heightPixel(28)}
+          FAMILY={theme.fonts.BentonSans_Bold}
+          LINE_HEIGHT={heightPixel(36)}
+        />
+      </View>
+      <View style={styles({schema}).ratting_distance}>
+        <View style={styles({schema}).row}>
+          <Image
+            source={Images.MapPin_Icon}
+            style={styles({schema}).headerImg}
+          />
+          <CustomText
+            TEXT={'19 Km'}
+            SIZE={fontPixel(14)}
+            LINE_HEIGHT={heightPixel(14)}
+          />
+        </View>
+        <View style={styles({schema}).row}>
+          <Image source={Images.Star_Icon} style={styles({schema}).headerImg} />
+          <CustomText
+            TEXT={'4.8 Ratting'}
+            SIZE={heightPixel(14)}
+            LINE_HEIGHT={heightPixel(14)}
+          />
+        </View>
+      </View>
+      <CustomText
+        TEXT={String.Restaurant_Detail}
+        SIZE={fontPixel(12)}
+        LINE_HEIGHT={heightPixel(22)}
+        FAMILY={theme.fonts.BentonSans_Book}
+        CUSTOM_STYLE={{textAlign: 'left'}}
+      />
+      <PopularMenuList navigation={navigation} />
+      <RattingList />
+    </View>
   );
 };
 

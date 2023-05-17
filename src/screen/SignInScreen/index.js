@@ -128,6 +128,7 @@ const SignInScreen = ({navigation}) => {
             />
             <Formik
               // validationSchema={login_ValidationSchema}
+              enableReinitialize
               initialValues={{
                 Email: email,
                 Password: pass,
